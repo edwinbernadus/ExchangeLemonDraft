@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BlueLight.Main.LogSession>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    ServerTime : @ViewBag.ServerTime
+</p>
+<p>
+    ClientTime : @DateTime.Now
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GuidSession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsError)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuidSession)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsError)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ErrorMessage)
+            </td>
+             <td>
+            <a asp-action="Show" asp-route-id="@item.Id">Detail</a>
+            </td>
+        </tr>
+        <tr>
+           
+        </tr>
+
+}
+    </tbody>
+</table>

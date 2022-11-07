@@ -1,0 +1,74 @@
+{
+	"folders": [
+		{
+			"path": "ExchangeLemon\\ExchangeLemonCore\\Views"
+		},
+		{
+			"path": "ExchangeLemon\\ExchangeLemonCore\\wwwroot\\Scripts"
+		},
+		{
+			"path": "ExchangeLemon\\Document"
+		},
+		{
+			"path": "ExchangeLemon/BackEndClassLibraryCore"
+		},
+		{
+			"path": "ExchangeLemon/ExchangeLemonCore"
+		},
+		{
+			"path": "ExchangeLemon/ModelLibraryCore"
+		},
+		{
+			"path": "ExchangeLemon/LogicLibrary"
+		},
+		{
+			"path": "ExchangeLemon/UnitTestEventLogic"
+		},
+		{
+			"path": "ExchangeLemon/UnitTest"
+		},
+		{
+			"path": "ExchangeLemon/UnitTestWebVisit"
+		},
+		{
+			"path": "ExchangeLemon/WebSyncBotCore"
+		},
+		{
+			"path": "ExchangeLemon/WebGekkoCore"
+		}
+	],
+	"settings": {
+		"favorites.sortDirection": "ASC",
+		"favorites.groupsFirst": true,
+		"favorites.root": [
+			{
+				"type": "File",
+				"name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\LogicLibrary\\ModuleTwo\\VersionItem.cs",
+				"parent_id": null,
+				"id": "491YdhmI8OnC7jSM",
+				"workspacePath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\LogicLibrary\\ModuleTwo\\VersionItem.cs"
+			},
+			{
+				"type": "File",
+				"name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\RepositoryLibrary\\Infra\\ApplicationContext.cs",
+				"parent_id": null,
+				"id": "7Ne8ui1MJL2ZcWUY",
+				"workspacePath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\RepositoryLibrary\\Infra\\ApplicationContext.cs"
+			},
+			{
+				"type": "File",
+				"name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\BackEndClassLibraryCore\\Misc\\DependencyHelper.cs",
+				"parent_id": null,
+				"id": "rk5N1xhPDufHEz42",
+				"workspacePath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\BackEndClassLibraryCore\\Misc\\DependencyHelper.cs"
+			},
+			{
+				"type": "File",
+				"name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\ExchangeLemonCore\\wwwroot\\css\\bootstrap_dev.css",
+				"parent_id": null,
+				"id": "7ObwYGrTFPoJA1sS",
+				"workspacePath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\ExchangeLemonCore\\wwwroot\\css\\bootstrap_dev.css"
+			}
+		]
+	}
+}

@@ -1,0 +1,53 @@
+https://exchangebluefrontcore.visualstudio.com/MyFirstProject/_build/index?context=mine&path=%5C&definitionId=1&_a=completed
+https://exchangebluefuncbtc2.visualstudio.com/MyFirstProject/_build/index?context=mine&path=%5C&definitionId=1&_a=completed
+https://exchangebluekirin.visualstudio.com/MyFirstProject/_build/index?context=allDefinitions&path=%5C&definitionId=3&_a=completed
+https://exchangesyncbluecore.visualstudio.com/MyFirstProject/_build/index?context=mine&path=%5C&definitionId=1&_a=completed
+
+https://exchangebluefrontcoretwo.visualstudio.com/MyFirstProject/_build
+https://exchangefunctionappbitcoincore.azurewebsites.net/api/Version?code=kJbw3ZY3/egUu1OYNQeunu9DI6hHgm8dV2MkeYgdBcFi/QiIdG6gtg==
+
+BlueLight.Main.VersionItem.ParamVersion
+86
+5 - https://lemoncore.azurewebsites.net/debug/version
+2 - 
+    https://exchangefunctionappbitcoincore.azurewebsites.net/api/Version?code=R24E4bPMs4fvkcEQQdZUmX/FskLZjIRlNQjb6GBTPI/07fnSWYL5ng==
+    https://portal.azure.com/#@chrisglass1outlook.onmicrosoft.com/resource/subscriptions/e902f1d8-7d55-459e-8fd6-1e2ba2401a82/resourcegroups/exchangeblue/overview
+
+2 - https://exchangekirincore.azurewebsites.net/debug/version
+2 - https://exchangesyncbluecore.azurewebsites.net/debug/version
+
+azure grup
+https://portal.azure.com/#@chrisglass1outlook.onmicrosoft.com/resource/subscriptions/e902f1d8-7d55-459e-8fd6-1e2ba2401a82/resourcegroups/exchangeblue/overview
+
+
+https://exchangebluefrontcore.visualstudio.com/MyFirstProject/_build/index?buildId=2&_a=summary
+
+
+https://exchangebluewave.visualstudio.com/MyFirstProject/_build/index?buildId=4&_a=summary
+exchangebluewavedev
+https://exchangebluefuncbtc2.visualstudio.com/
+
+
+
+https://exchangebluefront.visualstudio.com/MyFirstProject/_build/index?buildId=2&_a=summary
+
+
+https://exchangebluehorizon.visualstudio.com/MyFirstProject/_build/index?buildId=3&_a=summary
+https://exchangebluewavedev.visualstudio.com/MyFirstProject/_build/index?buildId=3&_a=summary
+https://pegasusbluelight.visualstudio.com/MyFirstProject/_apps/hub/ms.vss-ciworkflow.build-ci-hub?_a=edit-build-definition&id=13
+https://pegasusbluelight.visualstudio.com//_admin/_buildQueue?_a=resourceLimits
+
+
+https://exchangebluefuncsyncjob.visualstudio.com/_projects
+
+https://exchangebluefrontcore.visualstudio.com/_admin/_buildQueue?
+https://coinmarkethistory.visualstudio.com/_admin/_buildQueue?
+https://exchangebluefrontcoretwo.visualstudio.com/_admin/_buildQueue?
+
+
+https://exchangebluefuncbtc2.visualstudio.com//_admin/_buildQueue?_a=resourceLimits
+https://exchangebluekirin.visualstudio.com//_admin/_buildQueue?_a=resourceLimits
+
+
+
+test

@@ -1,0 +1,147 @@
+@using BlueLight.Main;
+
+@{
+    ViewBag.Title = "Open Order";
+}
+
+@await Html.PartialAsync("_ScriptPaging")
+
+
+<h2 class="color-blue-one">Open Order</h2>
+
+<p>
+    @Html.ActionLink("Cancel All", "CancelAll")
+</p>
+<!-- <p>
+    @ViewBag.UrlSourceTable
+</p> -->
+<div id="app">
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script> -->
+    <v-paginator :resource_url="resource_url" @@update="updateResource"></v-paginator>
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>
+
+                </th>
+                <th>
+                    PAIRINGS
+                </th>
+                
+                <th>
+                    RATE
+                </th>
+                
+                <th>
+                    AMOUNT
+                </th>
+                
+                <th>
+                    LEFT
+                </th>
+                
+                <th>
+                    
+                </th>
+                
+                
+                 
+            </tr>
+        </thead>
+
+
+        <tr v-for="item in items">
+
+            <td class="clear_row">
+                <a v-bind:href="'/OpenOrder/Cancel/'+  item.Id"> Cancel </a>
+            </td>
+
+            <td class="clear_row">
+                {{ item.CurrencyPair }}
+            </td>
+
+            <td class="clear_row">
+                {{ item.DisplayRate }}
+            </td>
+
+            <td class="clear_row">
+                {{ rateAmount(item.Amount) }}
+            </td>
+
+
+            <td class="clear_row">
+                {{  rateAmount(item.Left)}}
+            </td>
+
+
+            <td class="clear_row">
+                {{ buyConverter(item.Buy) }}
+            </td>
+
+        </tr>
+
+
+    </table>
+
+
+
+
+
+</div>
+
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                items: [],
+                resource_url : '@ViewBag.UrlSourceTable'
+            }
+        },
+        components: {
+            VPaginator: VuePaginator
+        },
+        methods: {
+            updateResource(data) {
+                console.log("update resource")
+                console.log(data)
+                this.items = data
+            },
+            buyConverter(input) {
+                if (input == true) {
+                    return "buy"
+                }
+                else {
+                    return "sell"
+                }
+            },
+            rateAmount (input) {
+                let number1 = input;
+                let number2 = numeral(number1);
+                let string1 = number2.format("0,000.00");
+                let output = string1;
+                return output;
+            }
+        },
+        computed: {
+            totalItems: function () {
+                if (this.items != null) {
+                    console.log(this.items)
+                    let output = this.items.length
+                    return output
+                }
+                return -1
+
+            },
+        },
+
+    });
+</script>
+
+
+

@@ -1,0 +1,42 @@
+﻿@model List<BlueLight.Main.AccountTransaction>
+
+@{
+    /**/
+
+    ViewBag.Title = "History Transaction";
+}
+
+
+
+
+
+<h2>@ViewBag.Title.</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            TransactionDate
+        </th>
+        <th>
+            Amount
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+
+            <td></td>
+        </tr>
+    }
+
+</table>
+

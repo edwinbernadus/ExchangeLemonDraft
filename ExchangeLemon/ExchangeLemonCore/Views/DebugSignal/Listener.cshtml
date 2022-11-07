@@ -1,0 +1,92 @@
+<script>
+    function continueToChat() {
+        $('#spn-nick').text($('#nick').val());
+        $('#entrance').hide();
+        $('#chat').show();
+    }
+</script>
+<div class="form-group">
+    &nbsp;
+</div>
+
+<div id="entrance">
+    <!-- <label for="nick">Enter your nickname:</label>
+    <input type="text" id="nick" />
+    <button onclick="continueToChat()">Continue</button> -->
+</div>
+
+<div id="chat" style="display: none">
+    <h3 id="spn-nick"></h3>
+    <form id="frm-send-message" action="#">
+        <label for="message">Message:</label>
+        <input type="text" id="message" />
+        <input type="submit" id="send" value="Send" class="send" />
+    </form>
+    <div class="clear">
+    </div>
+    <ul id="messages"></ul>
+</div>
+
+<script src="/scripts/signalr.min.js"></script>
+
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/signal/transaction")
+        .build();
+
+
+    connection.on("ListenPair", (pair, rate) => {
+        console.log("ListenPair", pair);
+        console.log("ListenPair", rate);
+    });
+
+
+
+    connection.start()
+        .catch(
+            err => console.error(err.toString())
+        ).then((x) => {
+            // connection.invoke('SubmitPair', "btc_usd", "999");   
+        })
+</script>
+
+
+<script>
+    // const connection = new signalR.HubConnectionBuilder()
+    //     // .withUrl("/chat")
+    //     .withUrl("/signal/pair")
+    //     // .configureLogging(signalR.LogLevel.Information)
+    //     .build();
+
+    // connection.on("Submit", (pair, rate) => {
+    //     console.log("Submit pair", pair)
+    //     console.log("Submit rate", rate)
+    // });
+
+    // connection.on("Send", (pair, rate) => {
+    //     console.log("Send pair", pair)
+    //     console.log("Send rate", rate)
+    // });
+
+    // connection.on("Listen", (pair, rate) => {
+    //     console.log("Listen pair", pair)
+    //     console.log("Listen rate", rate)
+    // });
+
+    // connection.on("Execute", (pair, rate, data) => {
+    //     console.log("Execute pair", pair, data)
+    //     console.log("Execute rate", rate, data)
+    // });
+
+    // connection.start()
+    //     // .done(function () {
+    //     //     //Do interesting stuff
+    //     // })
+    //     .catch(
+    //         err => console.error(err.toString())
+    //     ).then((x) => {
+    //         // connection.invoke('Submit', "123", "456");   
+    //         connection.invoke('Execute', "one", "999");
+    //     })
+</script>

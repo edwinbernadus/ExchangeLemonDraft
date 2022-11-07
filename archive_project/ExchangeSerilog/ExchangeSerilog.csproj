@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.6.0" />
+    <PackageReference Include="Serilog.Sinks.AzureAnalytics" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00777" />
+
+    <PackageReference Include="Serilog.Sinks.MicrosoftTeams" Version="0.2.0" />
+    <PackageReference Include="Serilog.Sinks.Sentry" Version="2.1.6" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\BackEndClassLibraryCore\BackEndClassLibraryCore.csproj" />
+  </ItemGroup>
+
+</Project>

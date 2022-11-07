@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [{
+            "label": "build_debug_unit_test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ConsoleUnitTestDebug/ConsoleUnitTestDebug.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build_gekko",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ExchangeServerGekkoCore/ExchangeServerGekkoCore.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build_core",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ExchangeLemonCore/ExchangeLemonCore.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+<script src="~/Scripts/scripts_ext_three/vue.js"></script>
+<script src="~/Scripts/scripts_ext_three/vue-resource.js"></script>
+
+<div id="app" style="margin-top: 30px">
+    <div class="row" v-for="i in display_data">
+        <div class="col-xs-4" style="font-size: 11px">{{i.rate}}</div>
+        <div> test 123</div>
+    </div>
+
+    <button type="button" class="btn" v-on:click="UpdateAmount()">Click to Show</button>
+    <!-- <button type="button" class="btn" v-on:click="addSample">Click to Show</button> -->
+
+
+    <!-- <button v-on:click="addSample()"> Edit Mode: {{editMode}}</button> -->
+
+
+
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+<script src="~/Scripts/scripts_ext_two/model.js"></script>
+<script src="~/Scripts/scripts_ext_two/vue_playground.js"></script>
+<!-- <script src="~/Scripts/scripts_ext_two/vue_playground_two.js"></script> -->

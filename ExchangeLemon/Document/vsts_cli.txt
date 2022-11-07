@@ -1,0 +1,58 @@
+
+
+
+
+vsts project list  --i https://exchangebluefrontcoretwo.visualstudio.com
+vsts build definition list --i https://exchangebluefrontcoretwo.visualstudio.com --p MyFirstProject --query [].name
+vsts  build queue  --i https://exchangebluefrontcoretwo.visualstudio.com --p MyFirstProject --definition-name lemoncore
+
+vsts build list --i https://exchangebluefrontcoretwo.visualstudio.com --p MyFirstProject
+
+----
+
+vsts project list  --i https://exchangebluefuncbtc.visualstudio.com
+vsts build definition list --i https://exchangebluefuncbtc.visualstudio.com --p MyFirstProject --query [].name
+vsts  build queue  --i https://exchangebluefuncbtc.visualstudio.com --p MyFirstProject --definition-name ExchangeFunctionBitcoin-import
+
+vsts build list --i https://exchangebluefuncbtc.visualstudio.com --p MyFirstProject
+
+
+
+----
+
+vsts project list  --i https://exchangebluekirin.visualstudio.com
+
+vsts build list --i https://exchangebluekirin.visualstudio.com --p MyFirstProject --query '[].{definition.name}'
+
+vsts  build queue  --i https://exchangebluekirin2.visualstudio.com --p MyFirstProject --definition-name ExchangeFunctionBitcoin-import
+
+
+----
+vsts project list  --i https://exchangesyncbluecore.visualstudio.com
+vsts build definition list --i https://exchangesyncbluecore.visualstudio.com --p MyFirstProject --query [].name
+vsts  build queue  --i https://exchangesyncbluecore.visualstudio.com --p MyFirstProject --definition-name "MyFirstProject-ASP.NET Core-CI"
+
+vsts build list --i https://exchangesyncbluecore.visualstudio.com --p MyFirstProject
+vsts build list --i https://exchangesyncbluecore.visualstudio.com --p MyFirstProject --query [].definition.name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+vsts project list  --i https://coinmarkethistory.visualstudio.com
+
+vsts build list --i https://coinmarkethistory.visualstudio.com --p MyFirstProject
+
+vsts build queue  --i https://coinmarkethistory.visualstudio.com --p MyFirstProject --definition-name CoinMarketHistory-function
+
+vsts  build queue  --i https://coinmarkethistory.visualstudio.com --p MyFirstProject --definition-name CoinMarketHistory

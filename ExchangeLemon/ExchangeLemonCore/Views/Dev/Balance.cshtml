@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BlueLight.Main.MvInquiryBalanceWithUserName>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="color-blue-one">Balance</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrencyCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoldBalance)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td class="clear_row">
+            @Html.DisplayFor(modelItem => item.CurrencyCode)
+        </td>
+        <td class="clear_row">
+            @Html.DisplayFor(modelItem => item.AvailableBalance)
+        </td>
+        <td class="clear_row">
+            @Html.DisplayFor(modelItem => item.HoldBalance)
+        </td>
+        <td class="clear_row">
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+
+        <td class="clear_row">
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+    </tr>
+}
+
+</table>

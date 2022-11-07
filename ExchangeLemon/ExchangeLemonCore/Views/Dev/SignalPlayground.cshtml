@@ -1,0 +1,84 @@
+<h1>
+    Woot
+</h1>
+<div>
+<button onclick="clickOne()"> btc_usd</button>
+<button onclick="clickTwo()"> eth_usd</button>
+</div>
+
+<div>
+<button onclick="clickThree()"> remove btc_usd</button>
+<button onclick="clickFour()"> remove eth_usd</button>
+</div>
+
+<script src="/scripts/signalr_core/signalr.js"></script>
+<script>
+      
+        function onConnected(connection){
+            console.log(connection);
+
+            connection.stream("Counter", 10, 500)
+            .subscribe({
+                next: (item) => {
+                    console.log('next',item)
+                },
+                complete: () => {
+                    console.log('complete')
+                },
+                error: (err) => {
+                    console.log('error',err)
+                },
+        });
+
+
+        }
+        function bindConnectionMessage(connection) {
+            console.log('start')
+            var connection = new signalR.HubConnectionBuilder()
+                .withUrl('/stream')
+                .build();
+            bindConnectionMessage(connection);
+            connection.start()
+                .then(function () {
+                    onConnected(connection);
+                })
+                .catch(function (error) {
+                    console.error(error.message);
+                });       
+        }
+
+        const hub = new signalR.HubConnectionBuilder()
+        .withUrl("/signal/transaction")
+        .build();
+
+
+        hub.on("ListenDashboard", (content) => {
+                console.log("Signal-ListenDashboard", content)
+            });
+
+        hub.on("listenAvailable", (currencyPair,rate) => {
+            console.log("Signal-listenAvailable", currencyPair,rate)
+        });
+       
+
+        hub.start()
+
+
+        function clickOne(){
+            console.log('register btc_usd')
+            hub.invoke('RegisterCurrencyPair',  "btc_usd");   
+        }
+        function clickTwo(){
+            console.log('register eth_usd')
+            hub.invoke('RegisterCurrencyPair',  "eth_usd");   
+        }
+
+        function clickThree(){
+            console.log('unregister btc_usd')
+            hub.invoke('UnregisterCurrencyPair',  "btc_usd");   
+        }
+        function clickFour(){
+            console.log('unregister eth_usd')
+            hub.invoke('UnregisterCurrencyPair',  "eth_usd");   
+        }
+</script>

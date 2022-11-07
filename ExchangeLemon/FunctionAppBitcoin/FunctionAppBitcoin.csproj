@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AzureFunctionsVersion>v2</AzureFunctionsVersion>
+    <Configurations>Debug;Release;DebugIncludeUnitTest</Configurations>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="External\**" />
+    <EmbeddedResource Remove="External\**" />
+    <None Remove="External\**" />
+  </ItemGroup>
+  <ItemGroup>    
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.13" />    
+
+    <!-- <PackageReference Include="NBitcoin" Version="4.1.1.46" />
+    <PackageReference Include="QBitNinja.Client" Version="1.0.3.47" /> -->
+
+    <PackageReference Include="NBitcoin" Version="4.0.0.65" />    
+    <PackageReference Include="QBitNinja.Client" Version="1.0.3.46" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogicLibrary\LogicLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\" />
+  </ItemGroup>
+</Project>

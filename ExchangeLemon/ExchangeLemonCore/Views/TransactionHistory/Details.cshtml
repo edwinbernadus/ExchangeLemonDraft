@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Transaction History";
+}
+
+@await Html.PartialAsync("_ScriptPaging")
+<script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script> -->
+
+<h2 class="color-blue-one">Transaction History - BTC</h2>
+<p> Current Date: @ViewBag.CurrentDateTime </p>
+<p>
+    @ViewBag.UrlSourceTable
+</p>
+
+<div id="app">
+    <v-paginator :resource_url="resource_url" @@update="updateResource"></v-paginator>
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                ID    
+            </th>
+            <th>
+                DATE
+            </th>
+            <th>
+                AMOUNT
+            </th>
+            <th></th>
+        </tr>
+
+        
+        <tr v-for="item in items">
+            <td class="clear_row">
+                {{ item.Id}}
+            </td>
+            <td class="clear_row">
+                @*{{ item.CreatedDate }}*@
+                {{ moment(item.CreatedDate).format('MMMM Do YYYY, h:mm:ss a') }}
+            </td>
+            <td class="clear_row">
+                {{ item.Amount }}
+            </td>
+        </tr>
+
+     
+
+    </table>
+</div>
+
+
+
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                items: [],
+                resource_url : '@ViewBag.UrlSourceTable'
+            }
+        },
+        components: {
+            VPaginator: VuePaginator
+        },
+        methods: {
+            updateResource(data) {
+                console.log("update resource")
+                console.log(data)
+                this.items = data
+
+            },
+           
+        },
+        computed: {
+            totalItems: function () {
+                if (this.items != null) {
+                    console.log(this.items)
+                    let output = this.items.length
+                    return output
+                }
+                return -1
+
+            },
+        },
+
+    });
+</script>
+
+

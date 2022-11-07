@@ -1,0 +1,84 @@
+﻿@model IEnumerable<BlueLight.Main.MvInquiryBalance>
+@using BlueLight.Main
+    
+<!-- <h3>
+    Welcome
+</h3> -->
+
+<br/>
+
+<div>
+
+    <!-- <h4>Total Balance in BTC: 0.123456789 BTC</h4> -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h4>Your Balance : <font class="color-blue-one">@ViewBag.DisplayAverageBtc </font> BTC</h4>
+
+
+        <!-- <h4 style="background-color:lightcyan">
+            Balance
+        </h4> -->
+        <table class="table">
+            <!-- <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurrencyCode)
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Amount)*@
+                    AvailableBalance
+                </th>
+
+
+            </tr> -->
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="clear_row">
+                        @item.CurrencyCode.ToUpper()
+                    </td>
+                    <td class="clear_row">
+                        @*@item.AvailableBalance*@
+                        @DisplayHelper.RateDisplayExt(item.AvailableBalance, item.CurrencyCode)
+                        @*@item.AvailableBalance.ToString("0.0000000000000")*@
+                        @*@Html.DisplayFor(modelItem => item.AvailableBalance)*@
+                    </td>
+
+
+                </tr>
+                <tr/>
+            }
+        </table>
+    }
+</div>
+
+<hr/>
+@*<br />
+<br />*@
+
+
+@*<h2>
+    @Html.ActionLink("Spot Market", "Index", "SpotMarket")
+</h2>*@
+@*<div class="jumbotron jumbotron-fluid">*@
+<div class="jumbotron">
+    @*Click @Html.ActionLink("here", "Index", "SpotMarket") for start trading*@
+    <h2>
+        @Html.ActionLink("Click here to Start", "Index", "SpotMarket")
+    </h2>
+
+</div>
+
+<hr/>
+
+
+@*<h4 style="background-color:lightcyan">*@
+@*<h2 style="color:#337ab7">*@
+
+<h2 class="color-blue-one">
+    <!-- News -->
+</h2>
+<p>
+    <!-- @ViewBag.NewsContent -->
+    <!-- No news for today -->
+</p>

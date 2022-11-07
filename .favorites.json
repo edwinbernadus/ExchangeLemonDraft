@@ -1,0 +1,20 @@
+[
+    {
+        "type": "Directory",
+        "name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\ExchangeLemonCore\\Views\\SpotMarket",
+        "parent_id": null,
+        "id": "gR7QNCW5T462xewm",
+        "workspacePath": null,
+        "workspaceRoot": null,
+        "fsPath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\ExchangeLemonCore\\Views\\SpotMarket"
+    },
+    {
+        "type": "Directory",
+        "name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\ExchangeLemonCore\\wwwroot\\Scripts\\scripts_ext_two",
+        "parent_id": null,
+        "id": "WTJZARs6fNqeLKMb",
+        "workspacePath": null,
+        "workspaceRoot": null,
+        "fsPath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\ExchangeLemonCore\\wwwroot\\Scripts\\scripts_ext_two"
+    }
+]

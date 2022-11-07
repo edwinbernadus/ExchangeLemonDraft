@@ -1,0 +1,25 @@
+#chart-container {
+  width: 60%;
+  height: 300px;
+}
+
+a .color-menu {
+  /* color: blue; */
+  color: #618bac;
+}
+
+text-align: right;
+.style-one {
+  font-size: 11px;
+  padding-right: 0px;
+}
+
+.style-sell {
+  /* background-color: #d9534f;color: white */
+  background-color: #df9694;
+}
+
+.style-buy {
+  /* background-color: #5cb85c */
+  background-color: #9dc49d;
+}

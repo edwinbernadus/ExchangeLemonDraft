@@ -1,0 +1,318 @@
+﻿
+
+@model List<BlueLight.Main.Dashboard>
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script> -->
+<script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery.validate.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/modernizr.min.js"></script>
+<!-- <script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery.signalr-2.2.2.min.js"></script> -->
+
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/toastr.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/bootstrap.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/respond.js"></script>
+
+
+<script type="text/javascript" src="~/Scripts/scripts_ext_two/dashboard_lib.js"></script>
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<h2>Dashboard</h2>
+
+<div id="appMain">
+    <p>The button above has been clicked {{ counter }} times.</p>
+    <button v-on:click="counterMethod()">Refresh</button>
+    
+
+    <hr />
+    <p>LogTest : {{ logTest }} </p>
+    <p>Debug : {{ debug }} </p>
+    <p>CurrentDate : @ViewBag.DateTime</p>
+    <hr />
+
+    <h5>filter [{{filterKeyword}}]</h5>
+    <div v-for="item in filterWithoutNegativeCheck" v-bind:class="{ intro: isWarning(item.LastUpdate) }" >
+       
+    {{ item.TypeEvent }}: {{ item.Counter}}  - {{ convertTime(item.LastUpdate) }} - ID:{{item.Id}} - 
+    {{ getDiff(item.LastUpdate)}} 
+    </div>
+
+    <br/>
+    <hr/>
+    <h5>List Mandatory Items:</h5>
+    
+    <div v-for="item in mandatoryItems" >
+            {{ item }}
+    </div>
+    
+    <br/>
+    <hr/>
+    <h5>all</h5>
+    <div v-for="item in items" v-bind:class="{ intro: isWarning(item.LastUpdate) }" >
+       
+            {{ item.TypeEvent }}: {{ item.Counter}}  - {{ convertTime(item.LastUpdate) }} - ID:{{item.Id}} - 
+            {{ getDiff(item.LastUpdate)}} 
+    </div>
+
+    <br/>
+    
+
+
+
+</div>
+
+@await Html.PartialAsync("_VueInit")
+
+<script>
+
+    // Array.prototype.except = function(val) {
+    //     return this.filter(function(x) { return x !== val; });        
+    // }; 
+
+    var app = new Vue({
+        el: '#appMain',
+        data: {
+            filterKeyword: "NegativeCheck",
+            debug : "debug console",
+            counter: 0,
+            logTest: "",
+            items: [],
+            isColor : false
+
+        },
+        methods: {
+            counterMethod: function (output) {
+                debugOne()
+                this.counter++
+            },
+            convertTime : function(input){
+                let output = libConvertTime(input)
+                return output
+            },
+            getDiff: function(inputTime){
+                let output = libGetDiff(inputTime)
+                return output
+            },
+            isWarning : function(input){
+                let output = this.getDiff(input)
+                let limit = 60 * 30
+                let output2 = output > limit
+                return output2
+            },
+           
+            getContent: function (event_type) {
+                let item = this.items.filter(x => x.TypeEvent == event_type)[0]
+                if (item == null) {
+                    return ""
+                }
+
+                let m3 = this.convertTime(item.LastUpdate);
+                let output = item.Counter + "  --  " + m3
+                return output
+            },
+            checkHasItem : function (input,currents ) {
+                let output = false
+                currents.forEach(element => {
+                    if (element == input){
+                        output = true
+                    }
+                });
+                return output
+            },
+            filterLogic : function(input){
+                let filterKey = this.filterKeyword.toLowerCase()
+                let z1 = input.toLowerCase()
+                let z2 = z1.includes(filterKey)
+                let z3 = !z2
+                return z3
+            }
+        },
+        computed: {
+            mandatoryItems: function(output) {
+                let items = getMandatoryArray()
+                let currents = this.items.map(x => x.TypeEvent)
+                
+                console.log("[mandatory-debug] items:", items)
+                console.log("[mandatory-debug] currents:", currents)
+
+
+                let items2 = items.filter (x => this.checkHasItem(x,currents)== false);
+                return items2
+            },
+            filterWithoutNegativeCheck : function() {
+                
+                // let items = this.items.filter(x =>  x.TypeEvent.toLowerCase().includes(filterKey))
+                let items = this.items.filter(x => this.filterLogic(x.TypeEvent))
+                return items
+            }
+        },
+        created: function () {
+            console.log("[debug-event] - created")
+        },
+
+        beforeDestroy() {
+            console.log("[debug-event] - before destroy")
+        }
+    })
+
+    let items = @Html.Raw(ViewBag.Items)
+    app.items = items
+
+ 
+</script>
+
+<script src="/scripts/signalr_core/signalr.js"></script>
+<script src="/scripts/signalr_core/msgpack5.js"></script>
+<script src="/scripts/signalr_core/signalr-protocol-msgpack.js"></script>
+<script>
+    const hub = new signalR.HubConnectionBuilder()
+        .configureLogging(signalR.LogLevel.Trace)
+        // .configureLogging(signalR.LogLevel.Information)
+        
+        .withUrl("/signal/transaction")
+        .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())
+        .build();
+
+    hub.on("ListenHelloWorld", (content) => {
+            console.log("Signal-ListenHelloWorld", content)
+    });
+
+    hub.on("ListenDashboard", (content) => {
+        console.log("Signal-ListenDashboard", content)
+
+        let input = JSON.parse(content);
+        app.logTest = input
+        let type_event = input.TypeEvent
+
+        if (type_event != null) {
+            console.log("[debug-item] type_event",type_event)
+            let item = app.items.filter(x => x.TypeEvent == type_event)[0]
+            if (item != null){
+                item.Counter = input.Counter
+                item.LastUpdate = input.LastUpdate
+
+                let inputTime = item.LastUpdate
+                let m0 = moment(inputTime);
+                let m1 = moment()
+                // let output = m1.diff(m0)
+                let output = app.getDiff(inputTime)
+                app.debug = m0 + " | " + m1 + " | " + output
+            }
+            else {
+                let newItem = new Object();
+                newItem.TypeEvent = type_event
+                newItem.Counter = input.Counter
+                newItem.LastUpdate = input.LastUpdate
+                newItem.Id = input.Id
+                // app.addItem(newItem)
+                app.items.push(newItem)
+            }
+            
+        }
+        
+    });
+
+    hub.closedCallbacks.push(function (error) 
+    { 
+        console.log('[reconnecting] connection closed',error);
+        tryConnecting();
+    });
+    tryConnecting();
+
+
+    function tryConnecting(){
+        let isConnected2 = true;
+        hub.start()
+        .catch(
+            err => {
+                isConnected2 = false;
+                console.error('[reconnecting] error - ' + err.toString());
+                setTimeout(tryConnecting, 3000);
+            }
+        ).then((x) => {
+            if (isConnected2){
+            console.log("[reconnecting] SignalR Core reconnected");
+            console.log("[reconnecting] [HUB] started");
+            }
+        })
+    }
+
+
+    
+</script>
+
+  <!-- let isConnected1 = true;
+    hub.start()
+        .catch(
+            err => {
+                isConnected1 = false;
+                console.error(err.toString());
+            }
+        ).then((x) => {
+            if (isConnected1){
+            console.log("SignalR Core connected");
+            console.log("[HUB] started");
+            }
+    })
+
+    hub.connection.onclose(function() {
+
+        let m = hub.connection.connectionState;
+        console.log("[HUB] disconnect")
+
+        vm.signalCondition = "off"
+        vm.signalLastStatus = "disconnect"
+    });
+
+    
+    hub.connection.onreceive.add(function (data) { console.log('x0',data) });
+    hub.connection.onclose = function (error) { console.log('x1',error) };
+    hub.callbacks.add(function (error) { console.log('x1',error) }); -->
+
+
+@*<script src="~/signalr/hubs"></script>*@
+
+<!-- 
+<script type="text/javascript">
+
+
+    var connection = $.hubConnection();
+    var transactionHub = connection.createHubProxy('transactionHub');
+    transactionHub.on('dashboardListener', function (content) {
+        console.log('[dashboard]', content)
+
+
+        let input = JSON.parse(content);
+        app.logTest = input
+        let type_event = input.TypeEvent
+
+        if (type_event != null) {
+
+            let item = app.items.filter(x => x.TypeEvent == type_event)[0]
+            item.Counter = input.Counter
+            item.LastUpdate = input.LastUpdate
+        }
+
+    });
+
+    @*let signalUrl = '@ViewBag.SignalConnectionUrl' + '/signalR'*@
+    let signalUrl = '@ViewBag.SignalConnectionUrl' 
+    console.log('Connection url signal: ' + signalUrl)
+    //connection.url = 'http://localhost:50790/signalr';
+    connection.url = signalUrl;
+
+    connection.start().done(function () {
+        console.log("connection started")
+        // Wire up Send button to call NewContosoChatMessage on the server.
+
+        //transactionHub.invoke('dashboardSubmit', 'hello from web');
+
+
+    });
+
+  
+</script> -->

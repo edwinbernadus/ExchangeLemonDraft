@@ -1,0 +1,45 @@
+﻿<div class="table-responsive ">
+    <h4>Order Buy Detail</h4>
+    <table class="table table-striped table-sm ">
+        <thead>
+            <tr>
+
+
+                <th>Id</th>
+                <th>Date</th>
+                <th>Harga</th>
+                <th>BTC</th>
+                <th>Left Btc</th>
+                <th>IsComplete</th>
+                <th>TransactionIds</th>
+                <th>CreatedBy</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr v-for="key in orderBuys ">
+                <td>{{key.id}}</td>
+                <td>{{key.createdDate}}</td>
+                <td>{{key.requestRate}}</td>
+                <td>{{key.amount}}</td>
+                <td>{{key.leftAmount}}</td>
+                <td>{{key.isComplete}}</td>
+                <td>{{key.transactionIds}}</td>
+                <td>{{key.createdBy}}</td>
+                <td v-if="key.isComplete == false">
+                    <!-- class="btn btn-link" -->
+
+                    <button type="button" class="btn btn-link" v-on:click="cancelOrder(key.id)">Cancel</button>
+
+                </td>
+                <td v-else></td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+
+</div>

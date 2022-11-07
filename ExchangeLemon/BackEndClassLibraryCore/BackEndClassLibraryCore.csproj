@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--<TargetFramework>netcoreapp2.1</TargetFramework>-->
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Platforms>AnyCPU</Platforms>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="FoundationFrameworkTwo\**" />
+    <Compile Remove="ModuleTransaction\**" />
+    <EmbeddedResource Remove="FoundationFrameworkTwo\**" />
+    <EmbeddedResource Remove="ModuleTransaction\**" />
+    <None Remove="FoundationFrameworkTwo\**" />
+    <None Remove="ModuleTransaction\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <!-- <PackageReference Include="MediatR" Version="5.1.0" /> -->
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="Dapper.StrongName" Version="1.50.5" />
+    <PackageReference Include="FluentCache" Version="4.0.0.2" />
+    <!-- <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.2.3" /> -->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.1" />
+    <!-- <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.2" /> -->
+    <!-- <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0" /> -->
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" /> -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.1.1" />
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.5" /> -->
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" /> -->
+    <!-- <PackageReference Include="Newtonsoft.Json" Version="11.0.2" /> -->
+    <!-- <PackageReference Include="Newtonsoft.Json" Version="11.0.2" /> -->
+       <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <!-- <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00777" /> -->
+    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BitcoinAdaptor\BitcoinAdaptor.csproj" />
+    <ProjectReference Include="..\DomainLibrary\DomainLibrary.csproj" />
+    <ProjectReference Include="..\LogicLibrary\LogicLibrary.csproj" />
+    <ProjectReference Include="..\OrderTransactionLib\OrderTransactionLib.csproj" />
+    <ProjectReference Include="..\RepositoryLibrary\RepositoryLibrary.csproj" />
+  </ItemGroup>
+  
+</Project>

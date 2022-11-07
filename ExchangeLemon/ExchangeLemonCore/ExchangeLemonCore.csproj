@@ -1,0 +1,202 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <!-- <TargetFramework>netcoreapp2.1</TargetFramework> -->
+    <UserSecretsId>aspnet-ExchangeLemonCore-D37D7E43-C2D5-4CE2-9E56-A8836BFA55DC</UserSecretsId>
+    <!-- <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion> -->
+     <!-- <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion> -->
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptEnabled>false</TypeScriptEnabled>
+
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <Configurations>Debug;Release</Configurations>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
+    <RazorCompileOnPublish>true</RazorCompileOnPublish>
+    <ApplicationInsightsResourceId>/subscriptions/f3663c11-d9f5-4a8f-a67b-314687f32f70/resourcegroups/orange_insight/providers/microsoft.insights/components/orange_insight</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/f3663c11-d9f5-4a8f-a67b-314687f32f70/resourcegroups/orange_insight/providers/microsoft.insights/components/orange_insight</ApplicationInsightsAnnotationResourceId>
+    <!-- <DebugType>portable</DebugType> -->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ControllersApi\Test\**" />
+    <Compile Remove="ModuleKirin\**" />
+    <Compile Remove="ModuleSyncBot\**" />
+    <Compile Remove="ModuleWebLibrary\**" />
+    <Compile Remove="wwwroot\datafeeds\**" />
+    <Content Remove="Controllers\ControllersApi\Test\**" />
+    <Content Remove="ModuleKirin\**" />
+    <Content Remove="ModuleSyncBot\**" />
+    <Content Remove="ModuleWebLibrary\**" />
+    <Content Remove="wwwroot\datafeeds\**" />
+    <EmbeddedResource Remove="Controllers\ControllersApi\Test\**" />
+    <EmbeddedResource Remove="ModuleKirin\**" />
+    <EmbeddedResource Remove="ModuleSyncBot\**" />
+    <EmbeddedResource Remove="ModuleWebLibrary\**" />
+    <EmbeddedResource Remove="wwwroot\datafeeds\**" />
+    <None Remove="Controllers\ControllersApi\Test\**" />
+    <None Remove="ModuleKirin\**" />
+    <None Remove="ModuleSyncBot\**" />
+    <None Remove="ModuleWebLibrary\**" />
+    <None Remove="wwwroot\datafeeds\**" />
+    <Content Update="wwwroot\images\lemon_2009.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- <ItemGroup>
+    <None Remove="content1.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="content1.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup> -->
+
+
+  <ItemGroup>
+    <!-- <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0-preview1-35029" /> -->
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0-preview1-35029" /> -->
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos.Sql" Version="2.2.0-preview1-35029" /> -->
+
+
+    <!-- <PackageReference Include="ElmahCore" Version="1.0.4" />
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.1.1" />
+
+    <PackageReference Include="Bogus" Version="22.1.2" />
+    <PackageReference Include="Microsoft.ApplicationInsights.SnapshotCollector" Version="1.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.0.2" /> -->
+    <PackageReference Include="Elmah.NetCore" Version="1.3.0" />
+
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.6.21" />
+
+    <PackageReference Include="Hangfire.MemoryStorage" Version="1.5.3" />
+
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Dapper.StrongName" Version="1.50.5" />
+    <!-- <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.4.0" /> -->
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+
+    
+    
+    <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="2.1.3" />
+
+    
+    
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
+
+    
+    
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="1.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
+    
+    <!-- <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.1.1" /> -->
+
+
+    
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.AutoHistory" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.UnitOfWork" Version="1.1.2" />
+    <PackageReference Include="ZNetCS.AspNetCore.Logging.EntityFrameworkCore" Version="2.0.1" />
+    <!-- <PackageReference Include="Rollbar" Version="2.1.1" /> -->
+    <PackageReference Include="Bugsnag.AspNet.Core" Version="2.2.0" />
+
+
+    <!-- <PackageReference Include="Coravel" Version="1.3.0" /> -->
+    <!-- <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.0" /> -->
+    
+    <!-- <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="1.0.0" /> -->
+    <!-- <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.3.0" /> -->
+
+    
+    <!-- <PackageReference Include="Microsoft.AspNetCore.SignalR.MsgPack" Version="1.0.0-preview2-final" /> -->
+    <!-- <PackageReference Include="Microsoft.Azure.SignalR" Version="1.0.0-preview1-10011" /> -->
+    <!-- <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.0.0" /> -->
+    <!-- <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.0.0" /> -->
+
+    <!-- <PackageReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0" /> -->
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.5" /> -->
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" PrivateAssets="All" /> -->
+    <!-- <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" PrivateAssets="All" /> -->
+
+    
+    <!-- <PackageReference Include="NLog.Web.AspNetCore" Version="4.5.4" /> -->
+    <!-- <PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" /> -->
+    <!-- <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" /> -->
+            
+    <!-- <PackageReference Include="NLog" Version="4.5.6" /> -->
+    <!-- <PackageReference Include="NLog.Extensions.Logging" Version="1.1.0" /> -->
+    
+
+    <!-- <PackageReference Include="Serilog.Sinks.AzureAnalytics" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00777" />
+
+    <PackageReference Include="Serilog.Sinks.MicrosoftTeams" Version="0.2.0" />
+    <PackageReference Include="Serilog.Sinks.Sentry" Version="2.1.6" /> -->
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BackEndClassLibraryCore\BackEndClassLibraryCore.csproj" />
+    <ProjectReference Include="..\PulseLogic\PulseLogic.csproj" />
+    <!-- <ProjectReference Include="..\BotWalletWatcherThreeLibrary\BotWalletWatcherThreeLibrary.csproj" /> -->
+    <ProjectReference Include="..\BotWalletModel\BotWalletModel.csproj" />
+    
+    <ProjectReference Include="..\CommonInterface\CommonInterface.csproj" />
+    <ProjectReference Include="..\LogicLibrary\LogicLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Dashboard\Pulse.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\PendingTransferLists\SentFailed.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SpotMarket\GraphDetail.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="wwwroot\Scripts\scripts_ext_two\detail_graph.js">
+      <DependentUpon>detail_graph.ts</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\Scripts\scripts_ext_two\detail_graph.js.map">
+      <DependentUpon>detail_graph.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Component\" />
+  </ItemGroup>
+  <PropertyGroup>
+      <DefaultItemExcludes>.git\**;$(DefaultItemExcludes)</DefaultItemExcludes>
+      <DefaultItemExcludes>custom\node_modules\**;$(DefaultItemExcludes)</DefaultItemExcludes>
+    </PropertyGroup>
+</Project>

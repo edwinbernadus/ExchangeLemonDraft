@@ -1,0 +1,225 @@
+﻿@using ExchangeLemonCore.Controllers
+@*@inject IOptions<AppSettings> AppSettings*@
+@{
+    ViewBag.Title = "Home Page";
+    //Layout = "~/Views/Shared/_LayoutTwo.cshtml";
+    const string imgUrl = "/Images/placeholder.png";
+}
+
+
+
+<h2 class="jumbotron" style="background:white"></h2>
+
+
+
+    @if (User.Identity.IsAuthenticated == false)
+    {
+        @*<h1>Welcome to Lemon Exchange</h1>*@
+        <h1 class="color_orange_dark" style="margin-top: -15px">Welcome to @GlobalParam.AppName</h1>
+        <br/>
+        <h3>Bitcoin Exchange Simulator.</h3>
+        <h3>Learn bitcoin, without spend any money</h3>
+        <br/>
+        
+        <h4>Click @Html.ActionLink("here", "Login", "Account", routeValues: null, htmlAttributes: null) to play</h4>
+        <h4>or go to @Html.ActionLink("spot market", "Index", "SpotMarket", routeValues: null, htmlAttributes: null) (without register)</h4>
+        @*<h3>@ViewBag.WelcomeMessage </h3>*@
+    }
+    else
+    {
+        <h1>Welcome @User.Identity.Name</h1>
+        <h3>Click @Html.ActionLink("here", "Welcome", "Home", routeValues: null, htmlAttributes: null) to continue</h3>
+    }
+    <br />
+    @*<img src="~/Images/home-showcase.png" />*@
+    <div>
+        <!-- <img style='height: 100%; width: 100%; object-fit: contain; max-width:350px' 
+        src="https://exchangefunction.blob.core.windows.net/web/lemon_2009.jpg" 
+        /> -->
+        <img style='height: 100%; width: 100%; object-fit: contain; max-width:250px' 
+        src="~/images/lemon_2009.jpg?v=2" 
+        />
+        
+
+    </div>
+
+    <div>
+        <h5>
+            Version: @BlueLight.Main.VersionItem.ParamVersion
+        </h5>
+
+    </div>
+
+
+
+
+@*Profil
+    Setting
+    Keamanan
+    Log Out
+
+    Beli / Jual Bitcoin Instant
+    Spot Market
+    Terima / Kirim Bitcoin
+    Setor / Tarik Rupiah
+    Voucer*@
+
+@{
+    var items = new List<string>();
+
+    if (User.Identity.IsAuthenticated)
+    {
+        //items.Add("Profil");
+        //items.Add("Setting");
+        //items.Add("Keamanan");
+        //items.Add("Log Out");
+    }
+}
+
+
+<ul class="row list-unstyled" id="album-list">
+
+    @*@foreach (var i in Enumerable.Range(0, 5).ToList()) *@
+    @foreach (var i in items)
+    {
+        <li class="col-lg-2 col-md-2 col-sm-2 col-xs-4 container">
+            @*<a asp-controller="Store" asp-action="Details" asp-route-id="@album.AlbumId">
+                    <img alt="@album.Title" src="@Url.Content(@album.AlbumArtUrl)" />
+                    <h4>@album.Title</h4>
+                </a>*@
+
+            <a>
+                <img src=@imgUrl />
+                <h4>Menu - @i</h4>
+            </a>
+            @*<a>Total : @i  </a>*@
+        </li>
+    }
+</ul>
+
+<br />
+<br />
+
+
+
+@*Beli / Jual Bitcoin Instant
+    Spot Market
+    Terima / Kirim Bitcoin
+    Setor / Tarik Rupiah
+    Voucer*@
+
+
+
+@*funds
+- balances
+- deposits
+- withdrawals
+- transaction history
+orders
+- open orders
+- order history
+- trade history*@
+
+
+@{
+    var items5 = new List<string>();
+    var items3 = new List<string>();
+    var items4 = new List<string>();
+
+    if (User.Identity.IsAuthenticated)
+    {
+        //items2.Add("Beli / Jual Bitcoin Instant");
+        //items2.Add("Spot Market");
+        //items2.Add("Terima / Kirim Bitcoin");
+        //items2.Add("Voucer");
+
+
+        List<string> items2 = null;
+
+        
+        items2 = items5;
+        items2.Add("Beli / Jual Bitcoin Instant");
+        items2.Add("Spot Market");
+        var items1 = items2;
+
+        items2 = items3;
+        items2.Add("balances");
+        items2.Add("deposits");
+        items2.Add("withdrawals");
+        items2.Add("transaction history");
+
+
+        items2 = items4;
+        items2.Add("open orders");
+        items2.Add("order history");
+        items2.Add("trade history");
+
+
+        items1.Clear();
+        items2.Clear();
+        items3.Clear();
+        items4.Clear();
+
+    }
+}
+
+
+<ul>
+
+    @foreach (var i in items5)
+    {
+        <li>
+
+            <a>
+
+                <h4>@i</h4>
+            </a>
+
+        </li>
+    }
+    <br />
+
+
+    @if (items3.Any())
+    {
+        <h4>Funds</h4>
+    }
+
+
+    @foreach (var i in items3)
+    {
+        <li>
+
+            <a>
+
+                <h4>@i</h4>
+            </a>
+
+        </li>
+    }
+    <br />
+
+    @if (items4.Any())
+    {
+        <h4>Orders</h4>
+    }
+
+    
+
+    @foreach (var i in items4)
+    {
+        <li>
+
+            <a>
+
+                <h4>@i</h4>
+            </a>
+
+        </li>
+    }
+</ul>
+
+<script>
+console.log('this is home screen')
+</script>
+

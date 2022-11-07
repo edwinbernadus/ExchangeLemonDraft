@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "ExchangeLemon\\ExchangeLemonCore"
+    },
+    {
+      "path": "ExchangeLemon\\OrderTransactionLib"
+    },
+    {
+      "path": "ExchangeLemon/BotWalletWatcherVerTwoReceive"
+    },
+    {
+      "path": "ExchangeLemon/BotWalletWatcherVerTwoSend"
+    }
+  ],
+  "settings": {
+    "favorites.sortDirection": "ASC",
+    "favorites.groupsFirst": true
+  }
+}

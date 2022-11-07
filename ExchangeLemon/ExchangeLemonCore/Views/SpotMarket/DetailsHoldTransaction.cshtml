@@ -1,0 +1,30 @@
+﻿<div class="table-responsive ">
+    <p>Hold Transaction</p>
+    <table class="table table-striped table-sm ">
+        <thead>
+            <tr>
+                <!-- Id	transactionDate	amount	runningHoldBalance -->
+                <!-- Id	Date	Harga	BTC	Left BTC	IsComplete	TransactionIds	CreatedBy	C -->
+
+                <th>Id</th>
+                <th>transactionDate</th>
+                <th>amount</th>
+                <th>runningHoldBalance</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr v-for="key in holdTransactions ">
+                <td>{{key.id}}</td>
+                <td>{{key.transactionDate}}</td>
+                <td>{{key.amount}}</td>
+                <td>{{key.runningHoldBalance}}</td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+
+</div>

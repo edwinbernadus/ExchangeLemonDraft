@@ -1,0 +1,54 @@
+concept transaction
+
+
+<< submit >>
+
+session 1
+add order 
+add hold seller
+
+
+<< match >>
+
+session 2
+add order
+add hold buyer
+
+
+session 2
+
+add order history
+
+
+
+session 2 
+transaction
+
+session 2
+last market
+
+session 2
+notification last market
+notification history order
+
+
+<< able to resume >>
+
+session 3
+remove hold buyer
+remove hold seller
+
+update balance buyer
+update balance seller
+
+session 3
+account history buyer
+account history seller
+hold history buyer
+hold history seller
+update order history 
+
+
+
+http://localhost:5000/debugsignal/submitbtcusd/123
+http://localhost:5000/debugsignal/submitethusd/456

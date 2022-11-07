@@ -1,0 +1,171 @@
+﻿
+@model List<BlueLight.Main.Pulse>
+@{
+    ViewBag.Title = "Pulse";
+}
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script> -->
+<script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery.validate.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/modernizr.min.js"></script>
+
+
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/toastr.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/bootstrap.min.js"></script>
+<script type="text/javascript" src="~/Scripts/scripts_ext_three/respond.js"></script>
+
+<script type="text/javascript" src="~/Scripts/scripts_ext_two/dashboard_lib.js"></script>
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<h2>Pulse</h2>
+
+<div id="appMain">
+    <p>The button above has been clicked {{ counter }} times.</p>
+    <button v-on:click="counterMethod()">Refresh</button>
+
+    <hr />
+    <p>LogTest : {{ logTest }} </p>
+    <p style="color:red">{{ newItemDisplay }} </p>
+    <p>CurrentDate Server : @ViewBag.DateTime</p>
+    <hr />
+
+
+    <div class="row" v-for="i in items" v-bind:class="{ intro: isWarning(i.CreatedDate) }">
+        
+        <p>
+        {{i.ModuleName}}: {{ getContent(i.ModuleName) }} - {{ i.CreatedDate}} - {{ getDiff(i.CreatedDate)}} 
+        </p>
+
+    </div>
+
+  
+
+
+
+</div>
+
+@await Html.PartialAsync("_VueInit")
+
+
+<script>
+    var app = new Vue({
+        el: '#appMain',
+        data: {
+            counter: 0,
+            logTest: "",
+            items: [],
+            newItemDisplay : "",
+
+        },
+        methods: {
+            counterMethod: function (output) {
+                this.counter++
+            },
+            convertTime : function(input){
+                let output = libConvertTime(input)
+                return output
+            },
+            getDiff: function(inputTime){
+                let output = libGetDiff(inputTime)
+                return output
+            },
+            isWarning : function(input){
+                let output = this.getDiff(input)
+                let limit = 60 * 30
+                // limit = 10
+                let output2 = output > limit
+                return output2
+            },
+            getContent: function (event_type) {
+                let item = this.items.filter(x => x.ModuleName == event_type)[0]
+                if (item == null) {
+                    return ""
+                }
+                let m3 = this.convertTime(item.LastUpdate);
+                let output = item.Counter + "  --  " + m3
+                return output
+            },
+
+
+        },
+        computed: {
+        },
+        created: function () {
+        },
+
+        beforeDestroy() {
+        }
+    })
+
+    let items = @Html.Raw(ViewBag.Items)
+    app.items = items
+</script>
+
+<script src="/scripts/signalr_core/signalr.js"></script>
+<script src="/scripts/signalr_core/msgpack5.js"></script>
+<script src="/scripts/signalr_core/signalr-protocol-msgpack.js"></script>
+<script>
+    const hub = new signalR.HubConnectionBuilder()
+        .configureLogging(signalR.LogLevel.Trace)
+        
+        .withUrl("/signal/pulse")
+        .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())
+        .build();
+
+
+
+    hub.on("listenPulseDetail", (content) => {
+        console.log("Signal-listenPulse", content)
+
+        let input = JSON.parse(content);
+        app.logTest = input
+        let type_event = input.ModuleName
+
+        if (type_event != null) {
+
+            let item = app.items.filter(x => x.ModuleName == type_event)[0]
+            if (item != null) {
+                item.Counter = input.Counter
+                item.CreatedDate = input.CreatedDate
+            }
+            else {
+                //app.newItemDisplay = "New items - reload";
+                // console.log("total [before]", app.items.length);
+                app.items.push(input);
+                // console.log("total [after]", app.items.length);
+
+            }
+            
+        }
+    });
+
+    hub.closedCallbacks.push(function (error) 
+    { 
+        console.log('[reconnecting] connection closed',error);
+        tryConnecting();
+    });
+    tryConnecting();
+
+
+    function tryConnecting(){
+        let isConnected2 = true;
+        hub.start()
+        .catch(
+            err => {
+                isConnected2 = false;
+                console.error('[reconnecting] error - ' + err.toString());
+                setTimeout(tryConnecting, 3000);
+            }
+        ).then((x) => {
+            if (isConnected2){
+            console.log("[reconnecting] SignalR Core reconnected");
+            console.log("[reconnecting] [HUB] started");
+            }
+        })
+    }
+
+
+    
+</script>

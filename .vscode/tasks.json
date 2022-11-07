@@ -1,0 +1,42 @@
+{
+    "version": "2.0.0",
+    "tasks": [{
+            "label": "build-wallet-watcher-receive",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ExchangeLemon/BotWalletWatcherReceive/BotWalletWatcherReceive.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }, {
+            "label": "build-wallet-watcher",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ExchangeLemon/BotWalletWatcher/BotWalletWatcher.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }, {
+            "label": "build-unit-test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ExchangeLemon/ConsoleUnitTestDebug/ConsoleUnitTestDebug.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-ExchangeLemonCore",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ExchangeLemon/ExchangeLemonCore/ExchangeLemonCore.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+﻿@using ExchangeLemonCore.Controllers
+
+<li> 
+    @Html.ActionLink("Spot Market", "Index", "SpotMarket", null, null)
+</li>
+<li role="separator" class="divider"></li>
+
+
+<li>
+    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:orange">
+        Orders
+    </a>
+
+    <ul class="dropdown-menu">
+        <li>
+
+            @Html.ActionLink("Open Order", "Index", "OpenOrder", null, null)
+        </li>
+  
+
+
+        <li>
+            @Html.ActionLink("Trade History", "Index", "TradeHistory", null, null)
+        </li>
+    </ul>
+</li>
+
+
+<li>
+    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:orange">
+        Funds 
+    </a>
+
+    <ul class="dropdown-menu">
+
+        @*<li> @Html.ActionLink("Balance", "Index", "Wallet", null, null)</li>*@
+        <li>
+            @Html.ActionLink("Deposit / Withdrawal", "Deposit", "Report", null, null)
+        </li>
+
+
+
+
+        @*<li> @Html.ActionLink("Transaction History", "HistoryTransactionExternal", "Bitcoin", null, null)</li>*@
+        <li> @Html.ActionLink("Transaction History", "Index", "TransactionHistory", null, null)</li>
+
+    </ul>
+</li>
+
+
+
+@*<li>
+    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:orange">
+        Cash 
+    </a>
+
+    <ul class="dropdown-menu">
+        <li> 
+            @Html.ActionLink("Deposit - IDR", "Deposit", "PlayerAccountTransactionDeposits", null, null)
+        </li>
+        <li> @Html.ActionLink("Withdrawal - IDR", "Create", "PlayerAccountTransactionWithdrawals", null, null)</li>
+        <li> @Html.ActionLink("Transfer IDR", "Transfer", "PlayerTransfer", null, null)</li>
+    </ul>
+</li>*@
+
+
+
+
+@if (GlobalParam.IsDevMode)
+{
+    <li>
+        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:orange">
+            Admin
+        </a>
+
+        <ul class="dropdown-menu">
+
+            <li> @Html.ActionLink("Dashboard", "Index", "Dashboard", null, null)</li>
+            <li> @Html.ActionLink("Test-Dashboard", "TestDashboard", "DebugSignal", null, null)</li>
+
+
+            <li> @Html.ActionLink("Server Sync BTC", "SyncBtc", "Bitcoin", null, null)</li>
+            @*<li> @Html.ActionLink("Deposit Crypto", "Deposit", "Bitcoin", null, null)</li>*@
+
+            @* <!-- <li> @Html.ActionLink("Light Menu", "Index", "LightMenu", null, null)</li> *@
+            <li>
+
+                @Html.ActionLink("Order History", "OrderHistory", "Report", null, null)
+
+            </li>
+            @* <li> @Html.ActionLink("Transaction History", "HistoryTransactionInternal", "Bitcoin", null, null)</li> *@
+
+
+            <li> @Html.ActionLink("Pending Send", "Index", "PendingTransferLists", null, null)</li>
+            <li> @Html.ActionLink("History Outgoing", "Index", "PendingBulkTransfers", null, null)</li>
+        </ul>
+    </li>
+
+}

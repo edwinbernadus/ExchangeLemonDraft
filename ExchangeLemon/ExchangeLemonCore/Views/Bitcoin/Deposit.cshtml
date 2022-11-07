@@ -1,0 +1,56 @@
+﻿@*@model string*@
+@using BlueLight.Main
+
+
+
+
+@{ 
+    var address = ViewBag.Address;
+}
+
+<h2>Deposit @ViewBag.Title.</h2>
+
+@*<script src="https://raw.githubusercontent.com/davidshimjs/qrcodejs/master/qrcode.min.js">
+
+</script>*@
+
+<script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+
+<div class="form-group">
+    
+    <div class="col-md-10">
+        <p>Warning:</p>
+        <p style="color:red">This is testnet version</p>
+    </div>
+
+    <br/>
+    <div class="col-md-10">
+        <p>Address:</p>
+        <p>@address</p>
+
+        <div id="qrcode"></div>
+
+
+        <hr />
+        <div>
+            @Html.ActionLink("Check Transfer", "SyncBtc", "Bitcoin", new {id = @ViewBag.Title}, null)
+        </div>
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrcode"), "@address");
+    </script>
+
+</div>
+
+
+
+<br />
+<br />
+
+

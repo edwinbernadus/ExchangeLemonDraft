@@ -1,0 +1,120 @@
+@using BlueLight.Main;
+
+@{
+    ViewBag.Title = "Market History";
+}
+
+@await Html.PartialAsync("_ScriptPaging")
+
+
+@{
+    //var pair = Request.Url.Segments.Last();
+    var pair = ViewBag.CurrencyPair;
+    var displayPair = DisplayHelper.ShowPair(pair);
+}
+
+<h2 class="color-blue-one">Market History - @displayPair</h2>
+<!-- <p>
+    @ViewBag.UrlSourceTable
+</p> -->
+
+<br />
+
+
+<div id="app">
+
+    <v-paginator :resource_url="resource_url" @@update="updateResource"></v-paginator>
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    ID
+                </th>
+
+                <th>
+                    AMOUNT
+                </th>
+
+                <th>
+                    RATE
+                </th>
+
+                <th>
+                    CREATEDBY
+                </th>
+
+            </tr>
+        </thead>
+
+
+        <tr v-for="item in items">
+
+            <td class="clear_row">
+                {{ item.Id }}
+            </td>
+
+            <td class="clear_row">
+                {{ item.Amount }}
+            </td>
+
+            <td class="clear_row">
+                {{ item.TransactionRate }}
+            </td>
+
+            <td class="clear_row">
+                {{ item.CreatedBy }}
+            </td>
+
+        </tr>
+
+
+    </table>
+
+
+
+
+
+</div>
+
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                items: [],
+                resource_url: '@ViewBag.UrlSourceTable'
+            }
+        },
+        components: {
+            VPaginator: VuePaginator
+        },
+        methods: {
+            updateResource(data) {
+                console.log("update resource")
+                console.log(data)
+                this.items = data
+
+            }
+        },
+        computed: {
+            totalItems: function () {
+                if (this.items != null) {
+                    console.log(this.items)
+                    let output = this.items.length
+                    return output
+                }
+                return -1
+
+            },
+        },
+
+    });
+</script>
+
+
+

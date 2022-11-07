@@ -1,0 +1,184 @@
+﻿@using ExchangeLemonCore.Controllers
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <title>@GlobalParam.AppName</title>
+
+    <link rel="shortcut icon" href="~/Content/favicon.ico" />
+    <link rel="apple-touch-icon" href="~/Content/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Content/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Content/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Content/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Content/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Content/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/apple-touch-icon-180x180.png" />
+
+
+    <environment include="Development">
+        <!-- <link rel="stylesheet" href="~/Scripts/scripts_ext_three/bootstrap.min.css" /> -->
+        <link href="~/css/bootstrap_dev.css?v=2" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/site.css?v=2" />
+        <!-- <link rel="stylesheet" href="~/Content/one.css?v=2" /> -->
+        <!-- <link rel="stylesheet" href="~/css/site.min.css?v=2" /> -->
+        <link rel="stylesheet" href="~/Content/one.min.css?v=2" />
+
+        <!-- <script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/toastr.min.js"></script>
+
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery.signalr-2.2.2.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/numeral.js"></script> -->
+    </environment>
+
+    <environment exclude="Development">
+        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" /> -->
+        <link href="~/css/bootstrap_dev.css?v=2" rel="stylesheet" />
+
+
+        <!-- <link rel="stylesheet" href="https://exchangefunction.blob.core.windows.net/web/site.css" />
+        <link rel="stylesheet" href="https://exchangefunction.blob.core.windows.net/web/one.css" /> -->
+        <!-- <link rel="stylesheet" href="~/css/site.min.css?v=2" /> -->
+        <link rel="stylesheet" href="~/Content/one.min.css?v=2" />
+        <link rel="stylesheet" href="~/css/site.css?v=2" />
+
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script> -->
+    </environment>
+
+    <link rel="stylesheet" href="~/css/trade.css?v=2" />
+
+
+
+</head>
+
+<body class="color_black_background">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top color_dark_blue_header" style="border-color:transparent">
+
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                @if (User.Identity.IsAuthenticated){
+                <a asp-area="" asp-controller="Home" asp-action="Welcome" 
+                class="navbar-brand color_yellow_title" style="font-weight: 400" >@GlobalParam.AppName</a>
+                } else {
+                <a asp-area="" asp-controller="Home" asp-action="Index" 
+                class="navbar-brand color_yellow_title" style="font-weight: 400" >@GlobalParam.AppName</a>
+                }
+            </div>
+            <div class="navbar-collapse collapse">
+                <!-- <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                </ul> -->
+                <ul class="nav navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @await Html.PartialAsync("_MenuAuth")
+                    }
+                    @if (GlobalParam.IsDevMode)
+                    {
+                        @await Html.PartialAsync("_MenuDev")    
+                    }
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content color_black_background">
+
+        @RenderBody()
+        @if (GlobalParam.IsDevMode)
+        {
+            <p class="color-red-text">Transaction layout mode</p>    
+        }
+        
+        
+        
+        <!-- <hr />
+        <footer>
+            <p>&copy; 2018 - @GlobalParam.AppName</p>
+        </footer> -->
+    </div>
+
+
+
+    <environment include="Development">
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery-2.0.3.min.js"></script>
+        <!-- <link rel="stylesheet" href="~/Scripts/scripts_ext_three/toastr.min.css" /> -->
+        <!-- <script type="text/javascript" src="~/Scripts/scripts_ext_three/toastr.min.js"></script> -->
+
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery.signalr-2.2.2.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+        <!-- <script type="text/javascript" src="~/Scripts/scripts_ext_three/numeral.js"></script> -->
+        
+        <!-- <link rel="stylesheet" href="~/Scripts/scripts_ext_three/bootstrap-select.min.css"> -->
+        <!-- <script type="text/javascript" src="~/Scripts/scripts_ext_three/bootstrap-select.min.js"></script> -->
+        
+
+    </environment>
+
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" /> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script> -->
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script> -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script> -->
+    </environment>
+
+    
+
+
+    @await Html.PartialAsync("_GoogleAnalytic")
+
+
+    <!-- <script src="~/lib/jquery/dist/jquery.js"></script> -->
+    <!-- <environment include="Development">
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/jquery-2.0.3.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment> -->
+
+    @RenderSection("Scripts", required: false)
+    <!-- @RenderSection("SignalScripts", required: false) -->
+</body>
+
+</html>

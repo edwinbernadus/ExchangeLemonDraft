@@ -1,0 +1,568 @@
+﻿@using BlueLight.Main
+@using ExchangeLemonCore.Controllers
+
+@{
+    Layout = "~/Views/Shared/_LayoutTransaction.cshtml";
+}
+<!-- 
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content=""> -->
+
+<div>
+
+
+
+
+@if (BlueLight.Main.DevHelper.IsDebug())
+{
+    <script src="~/Scripts/scripts_ext_three/vue.js"></script>
+    <script src="~/Scripts/scripts_ext_three/vue-resource.js"></script>
+    <script src="~/Scripts/scripts_ext_three/axios.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/scripts_ext_three/numeral.js"></script>
+}
+else
+{
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5/dist/vue-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+}
+
+
+<script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+<script type="text/javascript" src="https://static.cryptowat.ch/assets/scripts/embed.bundle.js"></script>
+
+
+<script src="/Scripts/signalr_core/signalr.js"></script>
+<script src="/Scripts/signalr_core/msgpack5.js"></script>
+<script src="/Scripts/signalr_core/signalr-protocol-msgpack.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="~/Scripts/scripts_ext_two/lib1.js"></script>
+
+@*<title>Transaction</title>*@
+
+
+<!-- </head>
+
+<body> -->
+
+@{
+    string currencyPair = ViewBag.CurrencyPair;
+}
+@Html.Hidden("currency_pair", currencyPair)
+
+
+<div class="">
+
+<main role="main" class="" id="app" style="color:white">
+
+@{
+    var styleNav = "margin-top:0px;";
+    //if (BlueLight.Main.Utils.fBrowserIsMobile())
+    //{
+    //    //styleNav = "margin-top:0px;margin-left:-30px;margin-right:-30px";
+    //}
+}
+
+
+<!-- <ul class="nav nav-tabs color-background-nav" style="@styleNav"> -->
+
+<ul class="nav nav-tabs container_menu flex-container color_dark_blue_header">
+    <li v-on:click="menu_two_click()"
+        style="border-bottom: 10px; "
+        v-bind:class="{ active: class_menu_two }">
+        <a href="#" class="color-white-one">Trade</a>
+    </li>
+    <li v-on:click="menu_one_click()"
+        v-bind:class="{ active: class_menu_one }">
+        <a href="#" class="color-white-one">Chart</a>
+    </li>
+    <li v-on:click="menu_three_click()"
+        v-bind:class="{ active: class_menu_three }">
+        <a href="#" class="color-white-one">Orders</a>
+    </li>
+
+</ul>
+
+<div v-bind:class="{ hidden: class_div_one_hidden }">
+    <br/>
+    <h4 class="color_yellow_title">{{currencyPairDisplay}} </h4>
+    <h3>{{lastRate}}</h3>
+
+
+    <!-- <hr /> -->
+    <!-- open graph -->
+
+    @await Html.PartialAsync("_GraphSample")
+    <!-- <div style="width:75%;">
+        <canvas id="canvas" width="1896" height="948" class="chartjs-render-monitor" style="display: block; height: 474px; width: 948px;"></canvas>
+        <button onclick="one()">OK</button>
+    </div> -->
+
+
+    <br/>
+
+    <div>
+        <button type="button" class="btn btn-success" v-on:click="menu_two_click();changeMode('buy');">Buy</button>
+        <button type="button" class="btn btn-danger" v-on:click="menu_two_click();changeMode('sell')">Sell</button>
+    </div>
+
+    <hr/>
+
+
+    <script src="~/Scripts//scripts_graph//Chart.bundle.js"></script>
+    <partial name="_StyleGraph"/>
+    <script src="~/Scripts//scripts_graph//utils.js"></script>
+    <script src="~/Scripts/scripts_ext_two/dev_graph_two.js"></script>
+    <!-- close graph -->
+
+    @*<hr />*@
+
+    <button type="button" class="btn_off small_font_size" v-on:click="marketPlaceClickToShow()" v-if="marketPlaceClickToShowVisibility">Click to Show</button>
+    <button type="button" class="btn_off small_font_size" v-on:click="marketPlaceClickNewItem()" v-if="marketPlaceClickNewItemVisibility">[New Item] Reload</button>
+    @await Html.PartialAsync("DetailsMarketHistoryTransaction")
+
+    <div class="color_yellow_title">
+        @Html.ActionLink("Show All", "Details", "MarketHistoryTransaction", new {id = ViewBag.CurrencyPair}, null)
+    </div>
+    @*<hr/>*@
+    <div>
+
+        <!-- <div id="curve_chart" style="width: 320px; height: 240px"></div> -->
+        <!-- <div id="curve_chart" style="width: 280px; height: 240px"></div> -->
+        <!-- <div class="btcwdgt-chart"></div> -->
+    </div>
+
+
+    <!-- <br /> -->
+    <!-- <hr /> -->
+
+</div>
+
+<div v-bind:class="{ hidden: class_div_two_hidden }">
+
+<div class="">
+<div class="row">
+<div class="col-xs-7">
+
+
+    <br/>
+
+    <div class="button_combo_box">
+        <select v-model="current_pair_indicator"
+                v-on:change="changeCurrencyPair()" id="xyz"
+                class="button_combo_box selectpicker" data-width="107px">
+
+            @{
+                List<SpotMarket> items = ViewBag.SpotMarkets as List<SpotMarket>;
+                items = items ?? new List<SpotMarket>();
+            }
+
+
+            @foreach (var i in items)
+            {
+                <option value="@i.CurrencyPair">@DisplayHelper.ShowPairTitle(i.CurrencyPair)</option>
+            }
+
+        </select>
+    </div>
+    <a href="/Bitcoin/InsertManual/btc" style="color:red;font-size:20px" v-if="topUpVisible">TOP UP BTC</a>
+    <div style="padding-top: 12px">
+
+        <button type="button" class="btn_off button_buy_sell"
+                v-bind:class="{'btn-active' : currentMode == 'buy' }"
+                v-on:click="changeMode('buy')"
+                style="">
+            buy
+        </button>
+
+        <button type="button" class="btn_off button_buy_sell"
+                v-bind:class="{'btn-active' : currentMode == 'sell' }"
+                v-on:click="changeMode('sell')">
+            sell
+        </button>
+        <!-- style="border: #DEAC37; color:#DEAC37; border-color: #DEAC37" -->
+    </div>
+
+    <br/>
+
+    <div class="totals" v-if="checkLoginStatus">
+        <span class="color-grey-text">
+            Available:
+        </span>
+
+        <div class="color-white-text">
+            {{availableBalanceDisplay}}
+        </div>
+
+    </div>
+    <!-- <h4>Available:</h4> -->
+
+
+    <br/>
+    <div class="totals">
+
+        <span class="color-grey-text">Rate:</span>
+        <div>
+            <input type="number" placeholder="rate"
+                   style="max-width: 120px;"
+                   class="textbox_input"
+                   v-model="inputGenericRate">
+        </div>
+    </div>
+    <br/>
+    <div class="totals">
+        <span class="color-grey-text">Amount:</span>
+
+        <div>
+            <input type="number" :placeholder="placeHolderAmount" class="textbox_input"
+                   style="max-width: 120px" v-model="inputGenericAmount">
+        </div>
+    </div>
+
+    <br/>
+
+
+    <div class="totals" v-if="checkLoginStatus">
+        <span class="color-grey-text">
+            Max amount:
+        </span>
+
+        <div class="color-white-text">
+            {{maxAmountDisplay}}
+        </div>
+
+
+    </div>
+    <br/>
+
+    <div v-if="checkLoginStatus">
+        <button class="button_percentage"
+                v-on:click="update_percentage_indicator(1)">
+            25%
+        </button>
+        <button class="button_percentage"
+                v-on:click="update_percentage_indicator(2)">
+            50%
+        </button>
+        <button class="button_percentage"
+                v-on:click="update_percentage_indicator(3)">
+            75%
+        </button>
+        <button class="button_percentage"
+                v-on:click="update_percentage_indicator(4)">
+            100%
+        </button>
+    </div>
+
+    <br/>
+
+
+    <div class="totals">
+        <span class="color-grey-text">
+            Total:
+        </span>
+
+        <div class="color-white-text">
+            {{rateAmount(totalAmount)}} {{secondPair}}
+        </div>
+
+
+    </div>
+    <br/>
+
+    <div>
+
+        <button v-on:click="orderClick()"
+                v-bind:class="{'btn btn-success': currentMode == 'buy',
+                                 'btn btn-danger color-red': currentMode == 'sell'}">
+            {{showButton}}
+        </button>
+
+
+    </div>
+    <br/>
+    <div>Ver: @GlobalParamVersion.Version </div>
+    <div>Js Version: {{version}} </div>
+
+</div>
+<div class="col-xs-5">
+    <!-- <h3 v-on:click="lastRateClick()" style="font-size: 22px">{{lastRate}}</h3> -->
+    <h3 v-on:click="lastRateClick()" style="font-size: 22px">{{lastRateDisplay}}</h3>
+
+    <div class="row">
+        <div class="col-xs-5" style="font-size: 11px">Price</div>
+        <div class="col-xs-4 style-one">Amount</div>
+        <div class="col-xs-2 style-one" v-if="editMode">RealAmt</div>
+        <div class="col-xs-2 style-one" v-if="editMode">Name</div>
+        <div class="col-xs-2 style-one" v-if="editMode">Id</div>
+
+    </div>
+    <!-- <br /> -->
+
+    <!-- <p class="color-blue-one">Sell Orders</p> -->
+    <div class="row" v-for="i in getListOrderSells">
+
+        <div class="col-xs-5 color-red-text" style="font-size: 11px;"
+             v-on:click="update_rate(i.Rate)"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{rateFormat(i.Rate,'usd')}}
+        </div>
+
+
+        <div class="col-xs-4 style-one"
+             style="text-align: right"
+             v-on:click="update_amount(i.LeftAmount)"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{rateAmount(i.LeftAmount)}}
+        </div>
+
+        <div class="col-xs-2 style-one"
+             v-if="editMode"
+             v-on:click="update_amount(i.Amount)"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{rateAmount(i.Amount)}}
+        </div>
+
+
+        <div class="col-xs-2 style-one"
+             v-if="editMode"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{i.ShortUserName}}
+        </div>
+        <div class="col-xs-2 style-one"
+             v-if="editMode"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{i.OrderId}}
+        </div>
+        @*<div class="col-xs-1 style-one">{{i.IsBuy == true ? "v" : "x"}}</div>*@
+
+    </div>
+
+    <br/>
+    <!-- <p class="color-blue-one">Buy Orders</p> -->
+    <div class="row" v-for="i in getListOrderBuys">
+
+        <div class="col-xs-5" style="font-size: 11px;color:#5cb85c"
+             v-on:click="update_rate(i.Rate)"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{rateFormat(i.Rate,'usd')}}
+        </div>
+
+        <div class="col-xs-4 style-one"
+             style="text-align: right"
+             v-on:click="update_amount(i.LeftAmount)"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{rateAmount(i.LeftAmount)}}
+        </div>
+
+        <div class="col-xs-2 style-one"
+             v-if="editMode"
+             v-on:click="update_amount(i.Amount)"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                'style-buy': i.isBuy == true}">
+            {{rateAmount(i.Amount)}}
+        </div>
+
+        <div class="col-xs-2 style-one"
+             v-if="editMode"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{i.ShortUserName}}
+        </div>
+        <div class="col-xs-2 style-one"
+             v-if="editMode"
+             v-bind:class="{'style-sell': i.isBuy == false,
+                                    'style-buy': i.isBuy == true}">
+            {{i.OrderId}}
+        </div>
+        @*<div class="col-xs-1 style-one">{{i.IsBuy == true ? "v" : "x"}}</div>*@
+
+    </div>
+
+
+</div>
+
+
+</div><!-- end row -->
+</div><!-- end container -->
+
+</div>
+
+<div v-bind:class="{ hidden: class_div_three_hidden }">
+    <br/>
+    <p> Current Date: @ViewBag.CurrentDateTime </p>
+    <div>
+        <h4 class="color_yellow_title">Pending Orders</h4>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 font-size-eleven">Rate</div>
+        <div class="col-xs-2 style-one">Amount</div>
+        <div class="col-xs-2 style-one">Left</div>
+        <div class="col-xs-2 style-one"></div>
+
+        <div class="col-xs-1 style-one">Id</div>
+        <div class="col-xs-1 style-one"></div>
+    </div>
+    <br/>
+    <div class="row" v-for="i in openOrder">
+        <div class="col-xs-3" style="font-size: 11px">{{i.Rate}}</div>
+
+        <div class="col-xs-2 style-one">{{rateAmount(i.Amount)}}</div>
+        <!-- <div class="col-xs-2 style-one">{{this.mathRoundTwo(i.Amount)}}</div> -->
+
+
+        <div class="col-xs-2 style-one">{{rateAmount(i.LeftAmount)}}</div>
+        <!-- <div class="col-xs-2 style-one">{{this.mathRoundTwo(i.LeftAmount)}}</div> -->
+        @*<div class="col-xs-2 style-one">{{i.IsBuy}}</div>*@
+        <div class="col-xs-2 style-one">{{ buyConverter(i.IsBuy) }}</div>
+
+
+        <div class="col-xs-1 style-one">{{i.OrderId}}</div>
+
+        <div class="col-xs-1 style-one color_yellow_title" v-on:click="cancelOrder(i.OrderId)">
+            <a href="" onclick="return false;">X </a>
+        </div>
+    </div>
+
+
+    <hr/>
+
+    <button type="button" class="btn_off small_font_size" v-on:click="historyTransactionClickToShow()" v-if="historyTransactionClickToShowVisibility">Click to Show</button>
+    <button type="button" class="btn_off small_font_size" v-on:click="historyTransactionClickNewItem()" v-if="historyTransactionClickNewItemVisibility">[New Item] Reload</button>
+    @await Html.PartialAsync("DetailsHistoryTransactionLite")
+
+
+</div>
+
+<hr/>
+<div v-if="is_dev_mode">
+    <div style="white-space:pre">{{ dev_log_console }}</div>
+    <br/>
+
+    <p>
+        Login Status : {{checkLoginStatus}}
+    </p>
+    <p>
+        Signal check: {{signalLastStatus}} - {{signalCondition}}
+    </p>
+    <!-- btn btn-danger -->
+    <button class="btn_off small_font_size" v-on:click="editModeClick()"> Edit Mode: {{editMode}}</button>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+</main>
+
+</div>
+
+
+<script>
+        var input_is_login = @ViewBag.IsLogin
+        var is_dev_mode = @ViewBag.IsDevMode.ToString()
+        console.log("debug3","is_dev_mode",is_dev_mode)
+</script>
+
+<script src="~/Scripts/scripts_ext_two/model.js"></script>
+<script src="~/Scripts/scripts_ext_two/script_api.js"></script>
+<script src="~/Scripts/scripts_ext_two/script_order.js"></script>
+<!-- <script src="~/Scripts/scripts_ext_two/script_listen.js"></script> -->
+<script src="~/Scripts/scripts_ext_two/detail_graph.js"></script>
+<script src="~/Scripts/scripts_ext_two/script_signal.js"></script>
+
+<script>
+        (function (b, i, t, C, O, I, N) {
+            window.addEventListener('load', function () {
+                if (b.getElementById(C)) return;
+                I = b.createElement(i), N = b.getElementsByTagName(i)[0];
+                I.src = t; I.id = C; N.parentNode.insertBefore(I, N);
+            }, false)
+        })(document, 'script', 'https://widgets.bitcoin.com/widget.js', 'btcwdgt');
+    </script>
+
+
+<script>
+        // var chart = new cryptowatch.Embed('bitfinex', 'btcusd', {
+        //     timePeriod: '1m',
+        //     width: 300,
+        //     presetColorScheme: 'delek'
+        // });
+        // chart.mount('#chart-container');
+    </script>
+
+<script>
+        function mathRoundTwo(input) {
+            // // let m = (Math.round(input * 1000) / 1000).toFixed(3)
+            // let m = (Math.round(input * 100000000) / 100000000).toFixed(8)
+            // return m
+            return input;
+        }
+    </script>
+
+@*<script>
+            var chart = c3.generate({
+                bindto: '#chart',
+                data: {
+                    url : '/api/ReportGraph/@currencyPair'
+                }
+
+            });
+            setTimeout(function () {
+                c3.generate({
+                    data: {
+                        url: '/api/ReportGraph/@currencyPair',
+                        mimeType: 'json'
+                    }
+                });
+            }, 1000);
+        </script>*@
+
+</div>
+
+<!-- </body>
+
+</html> -->
+
+
+@section Scripts {
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/Scripts/scripts_ext_three/toastr.min.css"/>
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/toastr.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/numeral.js"></script>
+
+        <link rel="stylesheet" href="~/Scripts/scripts_ext_three/bootstrap-select.min.css">
+        <script type="text/javascript" src="~/Scripts/scripts_ext_three/bootstrap-select.min.js"></script>
+
+
+    </environment>
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    </environment>
+
+}
+
+<!-- <partial name="graph_d3.cshtml" /> -->

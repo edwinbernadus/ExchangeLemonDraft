@@ -1,0 +1,126 @@
+﻿@using BlueLight.Main; 
+@model IEnumerable<BlueLight.Main.MvDetailReportOrder>
+
+    @{ ViewBag.Title = "Trade History Detail"; } @await Html.PartialAsync("_ScriptPaging")
+
+
+    <h2 class="color-blue-one">Trade History - @BlueLight.Main.DisplayHelper.ShowPair(@ViewBag.CurrentPair)</h2>
+    <!-- <p>
+        @ViewBag.UrlSourceTable
+    </p> -->
+
+
+
+    <br />
+    <p>
+        Average Buy :
+        <span class="color-blue-one">@DisplayHelper.RateDisplay(ViewBag.AverageBuy)</span>
+    </p>
+    <hr/>
+    <p>
+        Above last rate bought amount :
+        <span class="color-blue-one">-0.01</span>
+    </p>
+    <p>
+        Already sold amount :
+        <span class="color-blue-one">-0.01</span>
+    </p>
+    <br />
+
+
+    <div id="app">
+
+        <v-paginator :resource_url="resource_url" @@update="updateResource"></v-paginator>
+        <br />
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderId).ToString().ToUpper()
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rate).ToString().ToUpper()
+                </th>
+                <th>
+                    AMOUNT
+                </th>
+                <th>
+                    LEFT
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+
+
+            <tr v-for="item in items">
+                <td class="clear_row">
+                    {{ item.OrderId }}
+                </td>
+                <td class="clear_row">
+                    {{ item.Rate }}
+                </td>
+                <td class="clear_row">
+                    {{ item.TransactionAmount }}
+                </td>
+                <td class="clear_row">
+                    {{ item.LeftAmount }}
+                </td>
+                <td class="clear_row">
+                    {{ buyConverter(item.IsBuy) }} @*{{ item.IsBuy }}*@
+                </td>
+
+            </tr>
+
+
+        </table>
+
+
+
+
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    items: [],
+                    resource_url: '@ViewBag.UrlSourceTable'
+                }
+            },
+            components: {
+                VPaginator: VuePaginator
+            },
+            methods: {
+                updateResource(data) {
+                    console.log("update resource")
+                    console.log(data)
+                    this.items = data
+
+                },
+                buyConverter(input) {
+                    if (input == true) {
+                        return "buy"
+                    } else {
+                        return "sell"
+                    }
+                }
+            },
+            computed: {
+                totalItems: function() {
+                    if (this.items != null) {
+                        console.log(this.items)
+                        let output = this.items.length
+                        return output
+                    }
+                    return -1
+
+                },
+            },
+
+        });
+    </script>

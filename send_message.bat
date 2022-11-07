@@ -1,0 +1,1 @@
+curl -u o.0rfE5FBqWbUy8egPL3aihXj1V5LPwysW: -X POST https://api.pushbullet.com/v2/pushes --header "Content-Type: application/json" --data-binary "{\"type\": \"note\", \"title\": \"Build\", \"body\": \"Local Test\"}"

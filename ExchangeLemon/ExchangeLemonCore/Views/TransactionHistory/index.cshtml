@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BlueLight.Main.MvInquiryBalance>
+
+<p>
+    <h2 class="color-blue-one">Transaction History</h2>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrencyCode)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        @*<li> @Html.ActionLink("Transaction History", "HistoryTransactionExternal", "Bitcoin", null, null)</li>*@
+        <tr>
+            <td class="clear_row">
+                @Html.ActionLink(item.CurrencyCode.ToUpper(), "Details", "TransactionHistory",new { id = item.CurrencyCode },null)
+                
+                @*@Html.DisplayFor(modelItem => item.CurrencyPair)*@
+            </td>
+            @*<td class="clear_row">
+                @Html.ActionLink("Report", "TradeHistoryDetail", new { id = item.CurrencyPair })
+
+            </td>*@
+        </tr>
+    }
+
+</table>

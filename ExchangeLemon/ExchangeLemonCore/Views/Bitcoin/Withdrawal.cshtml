@@ -1,0 +1,122 @@
+﻿@model BlueLight.Main.MvDepositInsert
+@using BlueLight.Main
+
+
+
+
+@{
+    var items = ViewBag.Transactions as List<PendingTransferList>;
+}
+
+
+
+
+<h2>Withdrawal @ViewBag.Title.</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <!-- <h4>Withdrawal BTC</h4> -->
+        <hr />
+        @*<h4>PlayerAccountTransactionWithdrawal</h4>
+            <hr />*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Jumlah Withdrawal (BTC)
+            </label>
+            @*@Html.LabelFor(m => m.AmountIDR, new { @class = "col-md-2 control-label" })*@
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Address
+            </label>
+            @*@Html.LabelFor(m => m.AmountIDR, new { @class = "col-md-2 control-label" })*@
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<br />
+
+<div>
+    @Html.ActionLink("Check Send", "CheckSend", "Bitcoin", new { id = @ViewBag.Title }, null)
+</div>
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            TransactionDate
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Confirms
+        </th>
+        <th>
+            TxId
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in items)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Amount)*@
+            @item.Amount.ToString("F8")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusTransfer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConfirmTransfer)
+        </td>
+        <td>
+            <a href="https://testnet.blockchain.info/tx/@item.TransactionId">@item.TransactionId</a>
+            
+        </td>
+        <td></td>
+    </tr>
+    }
+
+</table>
+
+<div>
+    @*@Html.ActionLink("Back to List", "Index")*@
+</div>

@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ConceptBotModel\**" />
+    <Compile Remove="Controllers\ModelTwo\**" />
+    <Content Remove="Controllers\ConceptBotModel\**" />
+    <Content Remove="Controllers\ModelTwo\**" />
+    <EmbeddedResource Remove="Controllers\ConceptBotModel\**" />
+    <EmbeddedResource Remove="Controllers\ModelTwo\**" />
+    <None Remove="Controllers\ConceptBotModel\**" />
+    <None Remove="Controllers\ModelTwo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ConceptBot\BittrexLogicAccountController.cs" />
+    <Compile Remove="Controllers\ConceptBot\BittrexLogicMarketController.cs" />
+    <Compile Remove="Controllers\ConceptBot\BittrexLogicPublicController.cs" />
+    <Compile Remove="Controllers\Main\DebugController.cs" />
+    <Compile Remove="Controllers\Main\DebugDbKirinController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.0.4" />
+    <!-- <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" /> -->
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.3.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+
+    <!-- <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" /> -->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.1" />
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" PrivateAssets="All" /> -->
+    <!-- <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" PrivateAssets="All" /> -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <!-- <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" /> -->
+
+
+    <!-- <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" /> -->
+    <!-- <PackageReference Include="Microsoft.AspNetCore.App" /> -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BackEndClassLibraryCore\BackEndClassLibraryCore.csproj" />
+    <ProjectReference Include="..\LogicLibrary\LogicLibrary.csproj" />
+    <ProjectReference Include="..\SignalLogic\SignalLogic.csproj" />
+    <ProjectReference Include="..\ModuleKirin\ModuleKirin.csproj" />
+    <ProjectReference Include="..\PulseLogic\PulseLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\ConceptBot\" />
+  </ItemGroup>
+
+</Project>

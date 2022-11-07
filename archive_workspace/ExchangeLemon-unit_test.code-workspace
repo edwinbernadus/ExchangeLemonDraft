@@ -1,0 +1,44 @@
+{
+	"folders": [
+		{
+			"path": "ExchangeLemon/ConsoleUnitTestDebug"
+		},
+		{
+			"path": "ExchangeLemon/UnitTestEventLogic"
+		}
+	],
+	"settings": {
+		"favorites.sortDirection": "ASC",
+		"favorites.groupsFirst": true,
+		"favorites.root": [
+			{
+				"type": "File",
+				"name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\LogicLibrary\\ModuleTwo\\VersionItem.cs",
+				"parent_id": null,
+				"id": "491YdhmI8OnC7jSM",
+				"workspacePath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\LogicLibrary\\ModuleTwo\\VersionItem.cs"
+			},
+			{
+				"type": "File",
+				"name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\RepositoryLibrary\\Infra\\ApplicationContext.cs",
+				"parent_id": null,
+				"id": "7Ne8ui1MJL2ZcWUY",
+				"workspacePath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\RepositoryLibrary\\Infra\\ApplicationContext.cs"
+			},
+			{
+				"type": "File",
+				"name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\RepositoryLibrary\\Infra\\LogContext.cs",
+				"parent_id": null,
+				"id": "8t7fMbZcyhpFBKqJ",
+				"workspacePath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\RepositoryLibrary\\Infra\\LogContext.cs"
+			},
+			{
+				"type": "File",
+				"name": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\BackEndClassLibraryCore\\Misc\\DependencyHelper.cs",
+				"parent_id": null,
+				"id": "rk5N1xhPDufHEz42",
+				"workspacePath": "d:\\my_project\\ExchangeLemonDraft\\ExchangeLemon\\BackEndClassLibraryCore\\Misc\\DependencyHelper.cs"
+			}
+		]
+	}
+}

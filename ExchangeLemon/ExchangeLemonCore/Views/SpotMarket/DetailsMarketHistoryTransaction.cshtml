@@ -1,0 +1,35 @@
+﻿@*<div class="table-responsive ">*@
+<div>
+    <div>
+        <h4 class="color_yellow_title">Market Transaction</h4>
+    </div>
+
+    <table class="table  table-sm table-responsive">
+        <thead>
+            <tr>
+
+                <th>rate</th>
+                <th>amount</th>
+                @*<th>created_by</th>*@
+                <th>id</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr v-for="key in marketHistoryTransactions">
+
+                <td>{{key.TransactionRate}}</td>
+                <td>{{key.Amount}}</td>
+                @*<td>{{key.CreatedBy}}</td>*@
+                <td>{{key.Id}}</td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+    
+</div>

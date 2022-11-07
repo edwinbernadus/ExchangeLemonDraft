@@ -1,0 +1,13 @@
+{
+	"activeTaskName": "task1",
+	"tasks": [
+		{
+			"name": "default",
+			"files": []
+		},
+		{
+			"name": "task1",
+			"files": []
+		}
+	]
+}

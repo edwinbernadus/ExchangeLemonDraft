@@ -1,0 +1,176 @@
+﻿@using BlueLight
+@using BlueLight.Main
+@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+@await Html.PartialAsync("_VueInit")
+<!-- @if (BlueLight.Main.DevHelper.IsDebug())
+{
+    <script src="~/Scripts/scripts_ext_three/vue.js"></script>
+    <script src="~/Scripts/scripts_ext_three/vue-resource.js"></script>
+}
+else
+{
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5/dist/vue-resource.min.js"></script>
+} -->
+
+
+@*<div id="appMain2">
+    <p>
+        {{item1}}
+    </p>
+</div>*@
+
+
+<h2> </h2>
+<div class="row">
+    <div class="col-md-8" id="appMain">
+        <section id="loginForm">
+            @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {*@
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                @Html.AntiForgeryToken()
+                 @*<h4>Use a local account to log in.</h4>
+                 <h4>Default password: PasswordSuper%</h4>*@
+                <h4>Password: PasswordSuper</h4>
+                <hr />
+
+                <p style="color:red">Tips: click on these email example</p>
+                <h5>Other username: </h5>
+
+
+                @*<p>
+                        {{item1}}
+                    </p>*@
+                <ul v-on:click="user_click('guest1')">guest1@server.com</ul>
+                <ul v-on:click="user_click('guest2')">guest2@server.com</ul>
+                <ul v-on:click="user_click('guest3')">guest3@server.com</ul>
+                <br/>
+                <ul v-on:click="user_click_custom('bot_sync@server.com')">bot_sync@server.com</ul>
+                <ul v-on:click="user_click_custom('bot_trade@server.com')">bot_trade@server.com</ul>
+
+
+
+
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                   
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBox("email", "guest1@server.com", new Dictionary<string, object> {
+                            { "class", "form-control" },
+                            { "v-model", "inputEmail" }
+                        })
+
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+  
+                        @Html.Password("password", "PasswordSuper", new Dictionary<string, object> {
+                            { "class", "form-control" },
+                            { "v-model", "inputPassword" }
+                        })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                   
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-secondary" />
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Register as a new user", "Register")
+                </p>
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+                @*  }*@
+            </form>
+        </section>
+    </div>
+
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h4>Use another service to log in.</h4>
+            <hr />
+            @{
+                var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                if (loginProviders.Count == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                            for details on setting up this ASP.NET application to support logging in via external services.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in loginProviders)
+                                {
+                                    <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+    @*<div class="col-md-4">
+        <section id="socialLoginForm">
+             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl }) 
+
+            @Html.ActionLink("Debug Admin", "TestDebug", "Account")
+        </section>
+
+    </div>*@
+</div>
+
+
+
+<script>
+    var appTwo = new Vue({
+        el: '#appMain',
+        data: {
+            item1: "abc",
+            inputEmail: "guest1@server.com",
+            inputPassword : "PasswordSuper"
+        },
+        methods: {
+            user_click: function (output) {
+                this.inputEmail = output + '@@server.com'
+                this.inputPassword = "PasswordSuper"
+                console.log("user click-" + output)
+            },
+               user_click_custom: function (output) {
+                this.inputEmail = output
+                this.inputPassword = "PasswordSuper"
+                console.log("user click-" + output)
+            },
+        }
+    })
+</script>
+
+

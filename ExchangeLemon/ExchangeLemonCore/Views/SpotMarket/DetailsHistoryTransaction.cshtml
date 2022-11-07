@@ -1,0 +1,50 @@
+﻿<div class="table-responsive ">
+    <p>History Transaction</p>
+    <table class="table table-striped table-sm ">
+        <thead>
+            <tr>
+                <!-- Id	transactionDate	amount	runningHoldBalance -->
+                <!-- Id	Date	Harga	BTC	Left BTC	IsComplete	TransactionIds	CreatedBy	C -->
+                <!-- Id	currencyCode	currencyPair	rate	amount	runningBalance	isBuy -->
+
+                <th>Id</th>
+                <th>currencyCode</th>
+                <th>currencyPair</th>
+                <th>transaction_rate</th>
+                <th>request_rate</th>
+                <th>amount</th>
+                <th>runningBalance</th>
+                <th>isBuy</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <!-- public int Id { get; set; }
+            public double Amount { get; set; }
+            public string CurrencyPair { get; set; }
+
+            public string CurrencyCode { get; set; }
+            public double Rate { get; private set; }
+            public string DebitCreditType { get; set; }
+
+            public double RunningBalance { get; set; }
+             -->
+            <tr v-for="key in historyTransactions ">
+                <td>{{key.id}}</td>
+                <td>{{key.currencyCode}}</td>
+                <td>{{key.currencyPair}}</td>
+                <td>{{key.transactionRate}}</td>
+                <td>{{key.requestRate}}</td>
+                <td>{{key.amount}}</td>
+                <td>{{key.runningBalance}}</td>
+                <td>{{key.debitCreditType}}</td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+
+</div>

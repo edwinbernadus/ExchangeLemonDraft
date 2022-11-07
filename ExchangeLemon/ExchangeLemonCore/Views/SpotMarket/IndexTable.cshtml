@@ -1,0 +1,63 @@
+﻿@using BlueLight.Main
+@model  BlueLight.Main.MvSpotMarketExt
+
+<table class="table">
+    <tr>
+        <th width="100">
+            PAIRING
+        </th>
+        @*<th>
+            Vol
+        </th>*@
+        <th width="120">
+            PRICE
+        </th>
+        <th width="50">
+            VOLUME
+        </th>
+        <th width="50">
+             CHANGE 
+        </th>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <th width="120">
+                BALANCE
+            </th>
+        }
+
+    </tr>
+
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td class="clear_row">
+                @Html.ActionLink(
+               DisplayHelper.ShowPair(item.SpotMarket.CurrencyPair)
+               , "Details", new { id = item.SpotMarket.CurrencyPair})
+            </td>
+            
+            <td class="clear_row">
+                @DisplayHelper.RateDisplayExt(item.SpotMarket.LastRate, Model.CurrencyMode)
+            </td>
+            <td class="clear_row">
+                @*@DisplayHelper.RateDisplayExt(item.CalculateVolume, Model.CurrencyMode) -*@ 
+                @item.CalculateVolume.ToString("N3")
+            </td>
+
+            <td class="clear_row">
+                @Html.DisplayFor(modelItem => item.CalculateLastChange)% - [@Html.DisplayFor(modelItem => item.PreviousLastRate)]
+            </td>
+            
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td class="clear_row">
+                    @Html.DisplayFor(modelItem => item.MyBalance)
+                    @DisplayHelper.GetFirstPair(item.SpotMarket.CurrencyPair)
+                </td>
+            }
+
+        </tr>
+       
+    }
+
+</table>

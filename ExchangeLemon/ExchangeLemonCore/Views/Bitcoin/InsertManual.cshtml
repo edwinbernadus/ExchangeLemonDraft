@@ -1,0 +1,67 @@
+﻿@model BlueLight.Main.MvDepositInsert
+@using BlueLight.Main
+
+@{
+    /**/
+
+    ViewBag.Title = "Insert Manual";
+}
+
+
+
+@{
+    var items = ViewBag.Transactions as List<RemittanceTransaction>;
+}
+
+
+
+<h2>Insert Manual</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Insert manual coin</h4>
+    <hr />
+    @*<h4>PlayerAccountTransactionWithdrawal</h4>
+        <hr />*@
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">
+            Jumlah Deposit
+        </label>
+        
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">
+            Currency
+        </label>
+        
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Currency, new { @class = "form-control" , @readonly = "readonly" })
+            @*@Html.TextBoxFor(m => m.Currency, new { @class = "form-control", @disabled = "disabled" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+
+<div>
+    @*@Html.ActionLink("Back to List", "Index")*@
+</div>

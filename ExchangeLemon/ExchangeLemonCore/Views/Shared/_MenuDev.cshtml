@@ -1,0 +1,68 @@
+<li>
+    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:orange">
+        Dev
+    </a>
+
+    <ul class="dropdown-menu">
+
+        <li> @Html.ActionLink("Dashboard2", "Index", "Dashboard", null, null)</li>
+        <li> @Html.ActionLink("Version", "Version", "Debug", null, null)</li>
+        <li> @Html.ActionLink("VersionDetail", "VersionDetail", "Debug", null, null)</li>
+        <li> @Html.ActionLink("Show All Balance", "Balance", "Dev", null, null)</li>
+        <li> @Html.ActionLink("Balance Hold Filter", "HoldFilter", "Dev", null, null)</li>
+        <li> @Html.ActionLink("Inq Hold Balance", "GetHoldBalance", "DevReplay", null, null)</li>
+        @* <li> @Html.ActionLink("ELMAH", "Index", "Elmah", null, null)</li> *@
+        <li> <a href="/elmah">EMLAH</a></li>
+        <li> @Html.ActionLink("Dashboard Item", "Index", "LogDetails", null, null)</li>
+        <li> @Html.ActionLink("Test insert speed", "TestInsertSpeed", "DevAdmin", null, null)</li>
+
+
+        <li> @Html.ActionLink("Inquiry Config", "InquiryConfig", "DevAdmin", null, null)</li>
+        <li> @Html.ActionLink("Inquiry ConnString", "GetContent", "DevString", new { Id = 12345 }, null)</li>
+        @* <li> @Html.ActionLink("AMP Page", "DemoAmp", "Debug", new { Id = 12345 }, null)</li> *@
+
+        <li> @Html.ActionLink("Total LogHttp", "GetLogCount", "DevAdmin", null, null)</li>
+
+
+
+
+        <li> @*@Html.ActionLink("Pending Send", "Index", "PendingTransferLists", null, null)*@</li>
+        <li> @Html.ActionLink("History Outgoing", "Index", "PendingBulkTransfers", null, null)</li>
+
+
+        <li> @Html.ActionLink("LogRaw", "Index", "LogReceiveRaws", null, null)</li>
+        <li> @Html.ActionLink("Session Item", "Index", "LogSessions", null, null)</li>
+        <li> @Html.ActionLink("Pulse", "Pulse", "Dashboard", null, null)</li>
+        <li> @Html.ActionLink("InqBlockChain", "InquiryBlockChain", "DevAdmin", null, null)</li>
+        <li> @Html.ActionLink("InqForceClose", "ForceStopInquiry", "DevAdmin", null, null)</li>
+        <li> @Html.ActionLink("ChatWindow", "Chat", "Dev", null, null)</li>
+    </ul>
+</li>
+<li>
+    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:orange">
+        Test
+    </a>
+
+    <ul class="dropdown-menu">
+
+        <li> @Html.ActionLink("Send Random Transfer", "SendBtc", "debugSignal", null, null)</li>
+        
+    </ul>
+</li>
+
+<li>
+    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:orange">
+        Dashboard
+    </a>
+
+    <ul class="dropdown-menu">
+
+        <li> @Html.ActionLink("Dashboard2", "Index", "Dashboard", null, null)</li>
+        <li> @Html.ActionLink("Pulse", "Pulse", "Dashboard", null, null)</li>
+        
+        <li> @Html.ActionLink("Version", "Version", "Debug", null, null)</li>
+        <li> @Html.ActionLink("Inq Hold Balance", "GetHoldBalance", "DevReplay", null, null)</li>
+        <li> @Html.ActionLink("Init Data", "InitData", "Home", null, null)</li>
+
+    </ul>
+</li>

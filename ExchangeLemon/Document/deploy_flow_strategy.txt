@@ -1,0 +1,7 @@
+git pull local master
+git push bitbucket prod
+
+D:\my_project\ExchangeLemonDraft_Prod>git remote
+bitbucket
+local
+origin

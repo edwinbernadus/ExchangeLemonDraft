@@ -1,0 +1,14 @@
+{
+    "fileOptions": {
+        "systemExcludeSearchPatterns": [
+            "**/node_modules/**/*",
+            "**/bin/**/*",
+            "**/obj/**/*",
+            "**/node_modules/**/*",
+            "/archive_project/**/*",
+            "/unused/**/*",
+
+        ],
+        "userExcludeSearchPatterns": []
+    }
+}

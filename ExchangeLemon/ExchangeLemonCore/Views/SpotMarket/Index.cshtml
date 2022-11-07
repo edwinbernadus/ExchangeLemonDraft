@@ -1,0 +1,17 @@
+﻿
+@model BlueLight.Main.MvSpotMarket
+
+@{
+    ViewBag.Title = "Spot Market";
+}
+
+<h2 class="color-blue-one">
+    Spot Market
+</h2>
+
+@await Html.PartialAsync("IndexTable", Model.ItemsBottom)
+@* @await Html.PartialAsync("IndexTable", Model.ItemsTop) *@
+
+
+
+

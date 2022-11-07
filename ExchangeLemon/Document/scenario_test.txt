@@ -1,0 +1,13 @@
+
+http://localhost:5000/debugsignal/submitBalance
+http://localhost:5000/debugsignal/submitPair/5100
+
+http://localhost:5000/debugsignal/SubmitPairExt/5100?currencyPairInput=btc_usd
+http://localhost:5000/debugsignal/SubmitPairExt/900?currencyPairInput=eth_usd
+
+
+http://localhost:5000/debugsignal/submitPendingOrder/3?isCancel=true
+
+http://localhost:5000/debugsignal/submitMarketHistory
+http://localhost:5000/debugsignal/SubmitHistoryTransaction
+http://localhost:5000/debugsignal/SubmitGraph/2300

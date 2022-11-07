@@ -1,0 +1,38 @@
+@model List<BlueLight.Main.GraphPlainData>
+@using System.Linq;
+
+
+
+<br/>
+<br/>
+<hr/>
+
+<h1>
+    @ViewBag.Title 
+</h1>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<div id="curve_chart" style="width: 640px; height: 480px"></div>
+
+
+
+@*<script src="/scripts/signalr_core/signalr.js"></script>*@
+
+<script>
+
+    let sourceItems = [
+        @foreach (var i in Model)
+        {
+        // @Html.Raw("['" + @i.DateTime.Day + "'," + i.Value + "],")
+        // @Html.Raw("['" + "" + "'," + i.Value + "],")
+        @Html.Raw("['" + @i.Sequence + "'," + i.Value + "],")
+        }
+    ]
+
+   let items = [['Date', 'Btc']]
+
+    
+</script>
+<script src="~/Scripts/scripts_ext_two/dev_graph.js"></script>

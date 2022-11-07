@@ -1,0 +1,193 @@
+@using BlueLight.Main;
+
+@{
+    ViewBag.Title = "TradeHistoryDetail Title";
+}
+
+@await Html.PartialAsync("_ScriptPaging")
+
+
+<h2 class="color-blue-one">TradeHistoryDetail Title</h2>
+
+<!-- <p>
+    @ViewBag.UrlSourceTable
+</p> -->
+
+<br />
+
+
+<div id="app">
+
+    <v-paginator :resource_url="resource_url" @@update="updateResource"></v-paginator>
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>
+                    ISCOMPLETE
+                </th>
+                
+                <th>
+                    CURRENTPAIR
+                </th>
+                
+                <th>
+                    ID
+                </th>
+                
+                <th>
+                    RATE
+                </th>
+                
+                <th>
+                    DISPLAYRATE
+                </th>
+                
+                <th>
+                    DISPLAYAMOUNT
+                </th>
+                
+                <th>
+                    DISPLAYLEFTAMOUNT
+                </th>
+                
+                <th>
+                    AMOUNT
+                </th>
+                
+                <th>
+                    LEFTAMOUNT
+                </th>
+                
+                <th>
+                    TRANSACTIONAMOUNT
+                </th>
+                
+                <th>
+                    ISBUY
+                </th>
+                
+                <th>
+                    ISSHOW
+                </th>
+                
+                <th>
+                    USERNAME
+                </th>
+                
+                <th>
+                    SHORTUSERNAME
+                </th>
+            </tr>
+        </thead>
+
+
+        <tr v-for="item in items">
+        
+            <td class="clear_row">
+                {{ item.IsComplete }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.currentPair }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.Id }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.Rate }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.DisplayRate }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.DisplayAmount }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.DisplayLeftAmount }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.Amount }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.LeftAmount }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.TransactionAmount }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.IsBuy }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.IsShow }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.UserName }}
+            </td>
+        
+            <td class="clear_row">
+                {{ item.ShortUserName }}
+            </td>
+        </tr>
+
+
+    </table>
+
+
+
+
+
+</div>
+
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                items: [],
+                resource_url : '@ViewBag.UrlSourceTable'
+            }
+        },
+        components: {
+            VPaginator: VuePaginator
+        },
+        methods: {
+            updateResource(data) {
+                console.log("update resource")
+                console.log(data)
+                this.items = data
+
+            }
+        },
+        computed: {
+            totalItems: function () {
+                if (this.items != null) {
+                    console.log(this.items)
+                    let output = this.items.length
+                    return output
+                }
+                return -1
+
+            },
+        },
+
+    });
+</script>
+
+
+

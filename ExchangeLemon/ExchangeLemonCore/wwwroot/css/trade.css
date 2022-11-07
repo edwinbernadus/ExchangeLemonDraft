@@ -1,0 +1,244 @@
+th {
+    font-weight: normal
+}
+
+.trade-box {
+    position: relative;
+    padding: 0 0.5rem 0 57%;
+}
+
+.trade-box .trade-forms {
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    width: 50%;
+}
+
+.trade-box .depths {
+    width: 100%;
+}
+
+.page-trade .products {
+    margin: 0.7rem 0 0.9rem 0;
+}
+
+.page-trade .products .select {
+    text-align: left
+}
+
+.page-trade .products .select ul {
+    text-align: center;
+    border-radius: 5px;
+}
+
+.orderForm-title,
+.orderForm .filed {
+    margin-bottom: 0.75rem;
+}
+
+.orderForm-title .buttons-row .button {
+    border-color: #deac37;
+    color: #f0b90b;
+    font-size: 0.7rem;
+    border-radius: 0;
+    height: 1.6rem;
+    line-height: 1.6rem;
+}
+
+.orderForm-title .buttons-row .button.cur {
+    background-color: #deac37;
+    color: #fff;
+}
+
+.orderForm .filed.f-clear {
+    line-height: 100%;
+}
+
+.orderForm .filed.f-clear label {
+    font-size: 0.6rem;
+    color: #999;
+}
+
+.orderForm .filed.f-clear span {
+    font-size: 0.65rem;
+    color: #e9eaec;
+}
+
+.orderForm .orderPercent span {
+    background-color: #1a1e22;
+    color: #d5d5d5;
+    border: 1px solid #262d33;
+    height: 1.1rem;
+    line-height: 1.1rem;
+    width: 24%;
+    margin-right: 1%;
+    font-size: 0.5rem;
+    display: inline-block;
+    text-align: center
+}
+
+.orderForm .submit-btn {
+    border-radius: 0.1rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    font-size: 0.75rem;
+    color: #fff;
+}
+
+.orderForm .submit-btn.buy-btn {
+    background-color: #70a800;
+    border-color: #70a800;
+}
+
+.orderForm .submit-btn.sell-btn {
+    background-color: #FF007A;
+    border-color: #FF007A;
+}
+
+.orderForm .totals div {
+    margin-bottom: 0.2rem
+}
+
+.balances .totals {
+    border: 1px solid #262d33;
+    padding: 0.4rem;
+    font-size: 0.6rem;
+}
+
+.balances .totals div:nth-of-type(odd) {
+    color: #999999
+}
+
+.balances .totals div:nth-of-type(even) {
+    color: #ffffff
+}
+
+.balances .b-border {
+    border-bottom: 1px solid #333b46;
+}
+
+.balances {
+    background-color: #1a1e22;
+}
+
+.depths .bid {
+    margin-top: 0.7rem;
+}
+
+.depths table {
+    width: 100%;
+}
+
+.depths table th,
+.depths table td {
+    font-size: 0.6rem;
+    padding: 0.1rem;
+}
+
+.depths table th .font {
+    margin: 0;
+}
+
+.depths table th {
+    padding-top: 0;
+    font-size: 0.6rem;
+}
+
+.depths .lastPrice {
+    padding-top: 0.1rem;
+    line-height: 1.1rem;
+}
+
+.depths .lastPrice span {
+    color: #e9eaec;
+    font-size: 0.8rem;
+}
+
+.depths .lastPrice strong {
+    color: #333;
+    font-size: 0.7rem;
+}
+
+.depths .priceCol {
+    position: relative;
+    margin: 1rem 0 0.8rem 0
+}
+
+.depths .priceChange {
+    font-size: 0.6rem;
+    color: #e9eaec;
+}
+
+.depths .fontKline {
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+}
+
+.depths .priceCol i {
+    font-size: 1.4rem;
+    color: #999999
+}
+
+.depths .group {
+    font-size: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+.depths .group label {
+    width: 20%;
+}
+
+.depths .group span {
+    display: inline-block;
+    width: 16%;
+    height: 1rem;
+    line-height: 1rem;
+    background-color: #1a1e22;
+    margin-right: 3%;
+    text-align: center;
+    border: 1px solid #262d33;
+}
+
+.button {
+    border-radius: 0 !important;
+}
+
+.zhuzhuang {
+    position: absolute;
+    top: 0px;
+    bottom: 1px;
+    right: 0;
+    width: 0px;
+    z-index: 1;
+}
+
+.depths {
+    overflow: hidden
+}
+
+.depths td {
+    position: relative;
+}
+
+.depths td span {
+    z-index: 2;
+    position: relative;
+}
+
+.depths .ask tr .zhuzhuang {
+    background-color: #2c1524 !important;
+}
+
+.depths .bid tr .zhuzhuang {
+    background-color: #1e2617 !important;
+}
+
+.depths td:active span {
+    background-color: #20566c
+}
+
+.login-screen,
+.popup {
+    background-color: #1c2226
+}

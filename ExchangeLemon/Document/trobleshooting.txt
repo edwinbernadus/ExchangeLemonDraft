@@ -1,0 +1,6 @@
+error deployment EF
+- suspect in memory db
+
+error transaction
+- suspect error connstring signalr
+

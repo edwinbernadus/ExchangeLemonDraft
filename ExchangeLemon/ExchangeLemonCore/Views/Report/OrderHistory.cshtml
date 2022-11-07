@@ -1,0 +1,27 @@
+﻿@model IEnumerable<BlueLight.Main.MvInquiryBalancePair>
+
+<p>
+    <h2>Order History</h2>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrencyPair)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrencyPair)
+        </td>
+        <td>
+            @Html.ActionLink("Report", "OrderHistoryDetail", new {  id=item.CurrencyPair }) 
+            
+        </td>
+    </tr>
+}
+
+</table>

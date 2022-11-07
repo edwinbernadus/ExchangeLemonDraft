@@ -1,0 +1,52 @@
+
+
+		<script type="text/javascript" src="/charting_library/charting_library.min.js"></script>
+		<script type="text/javascript" src="/datafeeds/udf/dist/polyfills.js"></script>
+		<script type="text/javascript" src="/datafeeds/udf/dist/bundle.js"></script>
+
+		<script type="text/javascript">
+
+			function getParameterByName(name) {
+				name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+				var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+					results = regex.exec(location.search);
+				return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+
+			TradingView.onready(function()
+			{
+				var widget = new TradingView.widget({
+					save_image : true,
+					autosize: true,
+					//height:100,
+					//width:200,
+					//fullscreen: true,
+					symbol: 'AAPL',
+					interval: 'D',
+					container_id: "tv_chart_container",
+					//	BEWARE: no trailing slash is expected in feed URL
+					datafeed: new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
+					library_path: "/charting_library/",
+					locale: getParameterByName('lang') || "en",
+
+					disabled_features: ["use_localstorage_for_settings"],
+					preset: "mobile",
+					overrides: {
+						"paneProperties.background": "#222222",
+						"paneProperties.vertGridProperties.color": "#454545",
+						"paneProperties.horzGridProperties.color": "#454545",
+						"symbolWatermarkProperties.transparency": 90,
+						"scalesProperties.textColor" : "#AAA"
+					}
+				});
+			})
+
+		</script>
+
+
+		<!-- <div style="height: 150px;width:150px"> -->
+			<div></div>
+		<!-- <div > -->
+			<!-- <div id="tv_chart_container" style="height: 100px;width:100px"></div> -->
+			<div id="tv_chart_container" style="height: 350px" ></div>
+		<!-- </div> -->

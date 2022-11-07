@@ -1,0 +1,9 @@
+{
+  "Values": {
+    "one": "DefaultEndpointsProtocol=https;AccountName=storagebtcnode;AccountKey=APjnKFYv4ax2CplHFND15X/aO2Bxwr2lUqN46hjU3CVpaoCmMk0CZQSlEObU6/ZWEjMBUFeE0gAZv+6lzbzcgA==;EndpointSuffix=core.windows.net"
+  },
+  "one": "DefaultEndpointsProtocol=https;AccountName=storagebtcnode;AccountKey=APjnKFYv4ax2CplHFND15X/aO2Bxwr2lUqN46hjU3CVpaoCmMk0CZQSlEObU6/ZWEjMBUFeE0gAZv+6lzbzcgA==;EndpointSuffix=core.windows.net",
+  "connectionStrings": {
+    "one": "DefaultEndpointsProtocol=https;AccountName=storagebtcnode;AccountKey=APjnKFYv4ax2CplHFND15X/aO2Bxwr2lUqN46hjU3CVpaoCmMk0CZQSlEObU6/ZWEjMBUFeE0gAZv+6lzbzcgA==;EndpointSuffix=core.windows.net"
+  }
+}
